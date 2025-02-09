@@ -1,4 +1,4 @@
-import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { FC } from 'react';
 
 type Props = {

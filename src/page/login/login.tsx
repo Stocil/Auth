@@ -1,18 +1,16 @@
+import { SxProps } from '@mui/material';
+import { Page } from 'features/page';
 import { FC, FormEvent } from 'react';
 import { useLocation } from 'react-router';
-import { SxProps } from '@mui/material';
-
 import { routesPaths } from 'routes/routes';
 
-import { Page } from 'features/page';
-
-import { Input } from 'components/input';
 import { Button } from 'components/button';
 import { Divider } from 'components/divider';
 import { GoogleLoginButton } from 'components/google-login-button';
+import { Input } from 'components/input';
 
-import { LoginForm, StyledPaper } from './login-styled';
 import { LoginHeader } from './login-header';
+import { LoginForm, StyledPaper } from './login-styled';
 
 const sx: SxProps = {
   width: 350,
