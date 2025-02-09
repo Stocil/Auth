@@ -1,6 +1,7 @@
+import { FC } from 'react';
+
 import { Typography } from '@mui/material';
 import { indigo } from '@mui/material/colors';
-import { FC } from 'react';
 
 type Props = {
   isLogin: boolean;
