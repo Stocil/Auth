@@ -1,14 +1,17 @@
-import { FC } from 'react';
-
-import { Page } from '../../features/page';
-import { GoogleLoginButton } from '../../components/google-login-button';
-import { Input } from '../../components/input';
-import { LoginForm, StyledPaper } from './login-styled';
-import { SxProps } from '@mui/material';
-import { Divider } from '../../components/divider';
+import { FC, FormEvent } from 'react';
 import { useLocation } from 'react-router';
-import { routesPaths } from '../../routes/routes';
-import { Button as SubmitButton } from '../../components/button';
+import { SxProps } from '@mui/material';
+
+import { routesPaths } from 'routes/routes';
+
+import { Page } from 'features/page';
+
+import { Input } from 'components/input';
+import { Button } from 'components/button';
+import { Divider } from 'components/divider';
+import { GoogleLoginButton } from 'components/google-login-button';
+
+import { LoginForm, StyledPaper } from './login-styled';
 import { LoginHeader } from './login-header';
 
 const sx: SxProps = {
@@ -21,17 +24,21 @@ export const Login: FC = () => {
 
   const buttonText = isLogin ? 'Войти' : 'Зарегистрироваться';
 
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <Page>
       <StyledPaper>
         <LoginHeader isLogin={isLogin} />
 
-        <LoginForm>
+        <LoginForm onSubmit={onSubmit}>
           <Input placeholder='Логин' sx={sx} />
           {!isLogin && <Input placeholder='Почта' sx={sx} />}
           <Input placeholder='Пароль' sx={sx} />
 
-          <SubmitButton text={buttonText} />
+          <Button type='submit' text={buttonText} />
         </LoginForm>
 
         <Divider sx={sx} />
