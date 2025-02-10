@@ -1,5 +1,6 @@
-import { TextFieldProps } from '@mui/material';
 import { FC } from 'react';
+
+import { TextFieldProps } from '@mui/material';
 
 import { StyledInput } from './input-styles';
 

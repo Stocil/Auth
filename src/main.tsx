@@ -1,11 +1,13 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { ThemeModeProvider } from './theme';
-import { Router } from './routes';
+
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { clientId } from './constants';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+
+import { clientId } from './constants';
+import { Router } from './routes';
 import { store } from './store';
+import { ThemeModeProvider } from './theme';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -16,5 +18,5 @@ createRoot(document.getElementById('root')!).render(
         </ThemeModeProvider>
       </GoogleOAuthProvider>
     </Provider>
-  </StrictMode>
+  </StrictMode>,
 );

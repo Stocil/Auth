@@ -1,12 +1,14 @@
 import {
   BaseQueryFn,
   FetchArgs,
-  fetchBaseQuery,
   FetchBaseQueryArgs,
   FetchBaseQueryError,
+  fetchBaseQuery,
 } from '@reduxjs/toolkit/query';
+
+import { HttpCodes } from 'utils/http-codes';
+
 import { baseUrl } from '../api/constants';
-import { HttpCodes } from '../../utils/http-codes';
 
 export const baseQueryConfig: FetchBaseQueryArgs = {
   baseUrl: baseUrl,

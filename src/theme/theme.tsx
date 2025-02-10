@@ -1,5 +1,6 @@
 import React from 'react';
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { indigo } from '@mui/material/colors';
 
 type ThemeProps = {

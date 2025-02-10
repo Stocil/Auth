@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 
-import { HomePage } from 'page/homepage';
-import { Login } from 'page/login';
+import { HomePage } from 'pages/homepage';
+import { Login } from 'pages/login';
 
 type Route = {
   path: string;
