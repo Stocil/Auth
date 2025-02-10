@@ -13,6 +13,7 @@ import { baseUrl } from '../api/constants';
 export const baseQueryConfig: FetchBaseQueryArgs = {
   baseUrl: baseUrl,
   prepareHeaders: (headers) => {
+    // TODO: Возможно исправить
     const token = window.localStorage.getItem('token');
 
     if (token) {
