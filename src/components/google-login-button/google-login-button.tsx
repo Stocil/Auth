@@ -1,5 +1,6 @@
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { FC } from 'react';
+
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
 type Props = {
   isLogin: boolean;

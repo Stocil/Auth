@@ -1,4 +1,4 @@
-import { RootState } from '../';
+import { RootState } from 'store';
 
 export const getUserInfo = (state: RootState) => state.user.info;
 

@@ -1,5 +1,6 @@
-import { Auth } from '../../../types/entities/auth';
-import baseApi from '../../services/base';
+import { Auth } from 'types/entities/auth';
+
+import baseApi from 'store/services/base';
 
 export const authApi = baseApi.enhanceEndpoints({}).injectEndpoints({
   endpoints: (builder) => ({
