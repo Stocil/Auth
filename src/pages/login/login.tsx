@@ -1,4 +1,4 @@
-import { FC, FormEvent } from 'react';
+import { FC } from 'react';
 
 import { SxProps } from '@mui/material';
 import { useLocation } from 'react-router';
@@ -12,6 +12,7 @@ import { Input } from 'components/input';
 
 import { routesPaths } from 'routes/routes';
 
+import { useAuthUser } from './hooks';
 import { LoginHeader } from './login-header';
 import { LoginForm, StyledPaper } from './login-styled';
 
@@ -23,11 +24,9 @@ export const Login: FC = () => {
   const { pathname } = useLocation();
   const isLogin = pathname === routesPaths.signIn;
 
-  const buttonText = isLogin ? 'Войти' : 'Зарегистрироваться';
+  const { onSubmit, isLoading } = useAuthUser();
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
+  const buttonText = isLogin ? 'Войти' : 'Зарегистрироваться';
 
   return (
     <Page>
@@ -35,11 +34,27 @@ export const Login: FC = () => {
         <LoginHeader isLogin={isLogin} />
 
         <LoginForm onSubmit={onSubmit}>
-          <Input placeholder='Логин' sx={sx} />
-          {!isLogin && <Input placeholder='Почта' sx={sx} />}
-          <Input placeholder='Пароль' sx={sx} />
+          <Input name='login' placeholder='Логин' required sx={sx} />
 
-          <Button type='submit' text={buttonText} />
+          {!isLogin && (
+            <Input
+              name='email'
+              type='email'
+              placeholder='Почта'
+              required
+              sx={sx}
+            />
+          )}
+
+          <Input
+            name='password'
+            type='password'
+            placeholder='Пароль'
+            required
+            sx={sx}
+          />
+
+          <Button type='submit' text={buttonText} disabled={isLoading} />
         </LoginForm>
 
         <Divider sx={sx} />

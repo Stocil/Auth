@@ -9,5 +9,5 @@ export type Size = 'small' | 'large';
 type Props = TextFieldProps;
 
 export const Input: FC<Props> = (props) => {
-  return <StyledInput {...props} fullWidth />;
+  return <StyledInput {...props} fullWidth autoComplete='off' />;
 };
