@@ -2,13 +2,15 @@ import { FC } from 'react';
 
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
+import { setLocalStorageToken } from 'utils/token';
+
 type Props = {
-  isLogin: boolean;
+  isLoginPage: boolean;
 };
 
-export const GoogleLoginButton: FC<Props> = ({ isLogin }) => {
+export const GoogleLoginButton: FC<Props> = ({ isLoginPage }) => {
   const onSuccess = ({ credential }: CredentialResponse) => {
-    localStorage.setItem('token', String(credential));
+    setLocalStorageToken(String(credential));
   };
 
   const onError = () => {
@@ -22,7 +24,7 @@ export const GoogleLoginButton: FC<Props> = ({ isLogin }) => {
       size='large'
       shape='circle'
       theme='filled_blue'
-      text={isLogin ? 'signin_with' : 'signup_with'}
+      text={isLoginPage ? 'signin_with' : 'signup_with'}
       width={350}
     />
   );

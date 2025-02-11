@@ -3,8 +3,6 @@ import { FC } from 'react';
 import { SxProps } from '@mui/material';
 import { useLocation } from 'react-router';
 
-import { Page } from 'features/page';
-
 import { Button } from 'components/button';
 import { Divider } from 'components/divider';
 import { GoogleLoginButton } from 'components/google-login-button';
@@ -22,45 +20,46 @@ const sx: SxProps = {
 
 export const Login: FC = () => {
   const { pathname } = useLocation();
-  const isLogin = pathname === routesPaths.signIn;
+  const isLoginPage = pathname === routesPaths.signIn;
 
   const { onSubmit, isLoading } = useAuthUser();
 
-  const buttonText = isLogin ? 'Войти' : 'Зарегистрироваться';
+  const buttonText = isLoginPage ? 'Войти' : 'Зарегистрироваться';
 
   return (
-    <Page>
-      <StyledPaper>
-        <LoginHeader isLogin={isLogin} />
+    <StyledPaper>
+      <LoginHeader isLoginPage={isLoginPage} />
 
-        <LoginForm onSubmit={onSubmit}>
-          <Input name='login' placeholder='Логин' required sx={sx} />
+      <LoginForm onSubmit={onSubmit}>
+        <Input name='login' placeholder='Логин' required sx={sx} />
 
-          {!isLogin && (
-            <Input
-              name='email'
-              type='email'
-              placeholder='Почта'
-              required
-              sx={sx}
-            />
-          )}
-
+        {!isLoginPage && (
           <Input
-            name='password'
-            type='password'
-            placeholder='Пароль'
+            name='email'
+            type='email'
+            placeholder='Почта'
             required
             sx={sx}
           />
+        )}
 
-          <Button type='submit' text={buttonText} disabled={isLoading} />
-        </LoginForm>
+        <Input
+          name='password'
+          type='password'
+          placeholder='Пароль'
+          required
+          sx={sx}
+        />
 
-        <Divider sx={sx} />
+        <Button type='submit' text={buttonText} disabled={isLoading} />
+      </LoginForm>
 
-        <GoogleLoginButton isLogin={isLogin} />
-      </StyledPaper>
-    </Page>
+      <Divider sx={sx} />
+
+      {
+        // TODO: Добавить ссылку на "Нет аккаунта? Зарегистрироваться"
+      }
+      <GoogleLoginButton isLoginPage={isLoginPage} />
+    </StyledPaper>
   );
 };
