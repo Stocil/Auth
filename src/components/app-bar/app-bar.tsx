@@ -1,15 +1,15 @@
 import { FC } from 'react';
 
+import HttpsIcon from '@mui/icons-material/Https';
 import {
   AppBar as AppBarMui,
-  Link,
   SxProps,
   Toolbar,
   Typography,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router';
 
 import { Button } from 'components/button';
+import { Link } from 'components/link';
 
 import { routesPaths } from 'routes/routes.tsx';
 
@@ -29,7 +29,8 @@ export const AppBar: FC<Props> = ({ isLogin, onClick }) => {
     <AppBarMui position='fixed'>
       <Toolbar>
         <Typography variant='h4' fontWeight={700} sx={{ flexGrow: 1 }}>
-          <Link component={RouterLink} to={routesPaths.main} underline={'none'}>
+          <Link linkTo={routesPaths.main}>
+            <HttpsIcon color='primary' sx={{ mr: 1 }} />
             Auth
           </Link>
         </Typography>
