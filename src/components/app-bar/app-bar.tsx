@@ -1,30 +1,13 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import HttpsIcon from '@mui/icons-material/Https';
-import {
-  AppBar as AppBarMui,
-  SxProps,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar as AppBarMui, Toolbar, Typography } from '@mui/material';
 
-import { Button } from 'components/button';
 import { Link } from 'components/link';
 
 import { routesPaths } from 'routes/routes.tsx';
 
-type Props = {
-  isLogin: boolean;
-  onClick: () => void;
-};
-
-const sx: SxProps = {
-  padding: '4px 8px',
-};
-
-export const AppBar: FC<Props> = ({ isLogin, onClick }) => {
-  const buttonText = isLogin ? 'Выйти' : 'Войти';
-
+export const AppBar: FC<PropsWithChildren> = ({ children }) => {
   return (
     <AppBarMui position='fixed'>
       <Toolbar>
@@ -34,7 +17,8 @@ export const AppBar: FC<Props> = ({ isLogin, onClick }) => {
             Auth
           </Link>
         </Typography>
-        <Button onClick={onClick} text={buttonText} sx={sx} />
+
+        {children}
       </Toolbar>
     </AppBarMui>
   );

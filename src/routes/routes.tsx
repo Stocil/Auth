@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 
+import { Authorization } from 'pages/authorization';
 import { HomePage } from 'pages/homepage';
-import { Login } from 'pages/login';
 
 type Route = {
   path: string;
@@ -27,11 +27,11 @@ export const routes: Record<routesKeys, Route> = {
   },
   signIn: {
     path: routesPaths.signIn,
-    element: <Login />,
+    element: <Authorization />,
   },
   signUp: {
     path: routesPaths.signUp,
-    element: <Login />,
+    element: <Authorization />,
   },
 };
 

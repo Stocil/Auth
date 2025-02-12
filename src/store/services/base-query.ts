@@ -14,7 +14,7 @@ import { baseUrl } from '../api/constants';
 export const baseQueryConfig: FetchBaseQueryArgs = {
   baseUrl: baseUrl,
   prepareHeaders: (headers) => {
-    const token = getTokenFromLocalStorage(); // TODO: Возможно исправить
+    const token = getTokenFromLocalStorage();
 
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
@@ -45,7 +45,7 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQuery(preparedArgs, api, extraOptions);
 
   if (result.error && result.error.status === HttpCodes.UNAUTHORIZED) {
-    // await refreshToken(); TODO: Рефрешить токен тут
+    // await refreshToken(); TODO: Рефрешить токен тут, если токен не валидируется, то убирать его из локал стора
     result = await baseQuery(preparedArgs, api, extraOptions);
   }
 

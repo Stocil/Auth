@@ -1,29 +1,27 @@
 import { FC } from 'react';
 
 import { SxProps } from '@mui/material';
-import { useLocation } from 'react-router';
 
 import { Button } from 'components/button';
 import { Divider } from 'components/divider';
 import { GoogleLoginButton } from 'components/google-login-button';
 import { Input } from 'components/input';
 
-import { routesPaths } from 'routes/routes';
-
-import { useAuthUser } from './hooks';
+import { AuthFormEventType } from '../types';
 import { LoginHeader } from './login-header';
-import { LoginForm, StyledPaper } from './login-styled';
+import { LoginForm, LoginFormFooter, StyledPaper } from './login-styled';
+
+type Props = {
+  isLoginPage: boolean;
+  onSubmit: (e: AuthFormEventType) => void;
+  isLoading: boolean;
+};
 
 const sx: SxProps = {
   width: 350,
 };
 
-export const Login: FC = () => {
-  const { pathname } = useLocation();
-  const isLoginPage = pathname === routesPaths.signIn;
-
-  const { onSubmit, isLoading } = useAuthUser();
-
+export const Login: FC<Props> = ({ isLoginPage, isLoading, onSubmit }) => {
   const buttonText = isLoginPage ? 'Войти' : 'Зарегистрироваться';
 
   return (
@@ -54,12 +52,14 @@ export const Login: FC = () => {
         <Button type='submit' text={buttonText} disabled={isLoading} />
       </LoginForm>
 
-      <Divider sx={sx} />
+      <LoginFormFooter>
+        <Divider sx={sx} />
 
-      {
-        // TODO: Добавить ссылку на "Нет аккаунта? Зарегистрироваться"
-      }
-      <GoogleLoginButton isLoginPage={isLoginPage} />
+        {
+          // TODO: Добавить ссылку на "Нет аккаунта? Зарегистрироваться"
+        }
+        <GoogleLoginButton isLoginPage={isLoginPage} />
+      </LoginFormFooter>
     </StyledPaper>
   );
 };
