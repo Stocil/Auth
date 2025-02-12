@@ -1,11 +1,14 @@
 import { FC } from 'react';
 
-import { SxProps } from '@mui/material';
+import { SxProps, Typography } from '@mui/material';
 
 import { Button } from 'components/button';
 import { Divider } from 'components/divider';
 import { GoogleLoginButton } from 'components/google-login-button';
 import { Input } from 'components/input';
+import { Link } from 'components/link';
+
+import { routesPaths } from 'routes/routes';
 
 import { AuthFormEventType } from '../types';
 import { LoginHeader } from './login-header';
@@ -23,6 +26,10 @@ const sx: SxProps = {
 
 export const Login: FC<Props> = ({ isLoginPage, isLoading, onSubmit }) => {
   const buttonText = isLoginPage ? 'Войти' : 'Зарегистрироваться';
+  const tiptext = isLoginPage
+    ? 'Нет аккаунта, зарегистрироваться?'
+    : 'Есть аккаунт, войти?';
+  const linkTo = isLoginPage ? routesPaths.signUp : routesPaths.signIn;
 
   return (
     <StyledPaper>
@@ -55,9 +62,9 @@ export const Login: FC<Props> = ({ isLoginPage, isLoading, onSubmit }) => {
       <LoginFormFooter>
         <Divider sx={sx} />
 
-        {
-          // TODO: Добавить ссылку на "Нет аккаунта? Зарегистрироваться"
-        }
+        <Typography variant='body2' color='primary'>
+          <Link linkTo={linkTo}>{tiptext}</Link>
+        </Typography>
         <GoogleLoginButton isLoginPage={isLoginPage} />
       </LoginFormFooter>
     </StyledPaper>
