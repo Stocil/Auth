@@ -17,7 +17,7 @@ export namespace Auth {
     }
 
     export namespace LogoutUser {
-      export type Request = Entity['login'];
+      export type Request = { login: Entity['login'] };
       export type Response = void;
     }
   }

@@ -17,3 +17,9 @@ export const LoginForm = styled('form')`
   align-items: center;
   gap: 20px;
 `;
+
+export const LoginFormFooter = styled('div')`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
