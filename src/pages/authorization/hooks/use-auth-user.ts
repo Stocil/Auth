@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router';
+import { Location, useLocation, useNavigate } from 'react-router';
 
 import { useLoginUserMutation, useRegisterUserMutation } from 'store/api/auth';
 import { setUserLogin } from 'store/user/slice';
@@ -14,8 +14,16 @@ type Hook = () => {
   isLoading: boolean;
 };
 
+type LocationStateType = {
+  prevPath: string | undefined;
+};
+
 export const useAuthUser: Hook = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { state }: Location<LocationStateType> = useLocation();
+  const prevPath = state?.prevPath;
 
   const { pathname } = useLocation();
   const isLoginPage = pathname === routesPaths.signIn;
@@ -24,13 +32,15 @@ export const useAuthUser: Hook = () => {
   const [registerUser, { isLoading: isRegisterLoading }] =
     useRegisterUserMutation();
 
-  const clearFields = (fields: FormFields) => {
+  const onSuccess = (fields: FormFields) => {
     fields.login.value = '';
     fields.password.value = '';
 
     if (fields.email) {
       fields.email.value = '';
     }
+
+    navigate({ pathname: prevPath });
   };
 
   const onLoginUser = (e: AuthFormEventType) => {
@@ -48,7 +58,7 @@ export const useAuthUser: Hook = () => {
       .unwrap()
       .then((data) => {
         dispatch(setUserLogin(data));
-        clearFields({ login, password });
+        onSuccess({ login, password });
       });
   };
 
@@ -68,7 +78,7 @@ export const useAuthUser: Hook = () => {
       .unwrap()
       .then((data) => {
         dispatch(setUserLogin(data));
-        clearFields({ login, password, email });
+        onSuccess({ login, password, email });
       });
   };
 

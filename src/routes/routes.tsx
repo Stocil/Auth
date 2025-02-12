@@ -3,6 +3,8 @@ import { ReactElement } from 'react';
 import { Authorization } from 'pages/authorization';
 import { HomePage } from 'pages/homepage';
 
+import { PrivateRoute } from './private-route';
+
 type Route = {
   path: string;
   element: ReactElement;
@@ -12,12 +14,14 @@ enum routesKeys {
   main = 'main',
   signIn = 'signIn',
   signUp = 'signUp',
+  profile = 'profile',
 }
 
 export enum routesPaths {
   main = '/',
   signIn = '/sign-in',
   signUp = '/sign-up',
+  profile = '/profile',
 }
 
 export const routes: Record<routesKeys, Route> = {
@@ -32,6 +36,10 @@ export const routes: Record<routesKeys, Route> = {
   signUp: {
     path: routesPaths.signUp,
     element: <Authorization />,
+  },
+  profile: {
+    path: routesPaths.profile,
+    element: <PrivateRoute>Profile</PrivateRoute>,
   },
 };
 
