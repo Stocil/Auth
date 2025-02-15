@@ -9,7 +9,10 @@ import { HTTP_NO_BODY_PROVIDED } from 'constants/http-codes';
 
 export const signUp = (req: Request, res: Response) => {
   if (!req.body) {
-    res.status(HTTP_NO_BODY_PROVIDED).send('Необходимо отправить данные');
+    res
+      .status(HTTP_NO_BODY_PROVIDED)
+      .json({ error: 'Необходимо отправить данные' });
+
     return;
   }
 
