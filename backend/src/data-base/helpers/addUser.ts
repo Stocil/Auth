@@ -1,13 +1,13 @@
-import { User, UserRaw } from 'types/users';
+import { UserRaw } from 'types/users';
 
 import { id, increaseId, usersBd } from 'data-base/data-base';
 
 export const addUserToDB = (user: UserRaw) => {
-  const newUser: User = {
+  const newUser = {
     ...user,
-    id: id,
+    id,
   };
 
-  usersBd.push(newUser);
+  usersBd.set(id, newUser);
   increaseId();
 };
