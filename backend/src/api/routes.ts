@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { signUp } from './user/sign-up.js';
+import { signUp } from './user/sign-up';
 
 export const apiRouter = express.Router();
 

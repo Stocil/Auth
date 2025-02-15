@@ -24,5 +24,4 @@ const testUsers: User[] = [
 export const usersBd = [...testUsers];
 
 export let id = usersBd.length;
-
 export const increaseId = () => id++;
