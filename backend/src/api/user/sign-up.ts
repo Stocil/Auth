@@ -1,18 +1,14 @@
-import express from 'express';
+import { UserRaw } from 'types/users.js';
+
+import { Request, Response } from 'express';
 
 import { usersBd } from '../../data-base/data-base.js';
 import { addUserToDB } from '../../data-base/helpers/addUser.js';
 
-/**
- *
- * @param {express.Request} req
- * @param {express.Response} res
- */
-
-export const signUp = (req, res) => {
+export const signUp = (req: Request, res: Response) => {
   if (!req.body) res.status(400).send('Необходимо отправить данные');
 
-  const user = req.body;
+  const user: UserRaw = req.body;
   addUserToDB(user);
 
   res.json({ users: usersBd });
