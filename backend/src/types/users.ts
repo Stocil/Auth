@@ -4,6 +4,8 @@ export type UserRaw = {
   password: string;
 };
 
+export type UserLoginRequest = Omit<UserRaw, 'email'>;
+
 export type User = UserRaw & {
   id: number;
 };

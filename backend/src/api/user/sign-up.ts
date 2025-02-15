@@ -1,12 +1,17 @@
 import { UserRaw } from 'types/users';
 
-import { addUserToDB } from 'data-base/helpers/addUser';
+import { addUserToDB } from 'data-base/helpers/add-user';
 import { Request, Response } from 'express';
 
 import { generateTokens } from 'utils/generate-tokens';
 
+import { HTTP_NO_BODY_PROVIDED } from 'constants/http-codes';
+
 export const signUp = (req: Request, res: Response) => {
-  if (!req.body) res.status(400).send('Необходимо отправить данные');
+  if (!req.body) {
+    res.status(HTTP_NO_BODY_PROVIDED).send('Необходимо отправить данные');
+    return;
+  }
 
   const user: UserRaw = req.body;
   const userJWTData = {
