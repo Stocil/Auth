@@ -2,7 +2,7 @@ import { User } from 'types/users';
 
 import { usersBd } from 'data-base/data-base';
 
-import { getUserById } from './getUserById';
+import { getUserById } from './get-user-by-id';
 
 type Helper = (login: User['login']) => User | null;
 
