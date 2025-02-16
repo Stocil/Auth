@@ -11,15 +11,15 @@ export const access = (req: Request, res: Response) => {
 
   const token = headers.authorization?.split(' ')[1];
 
+  // TODO Переделать в мидлвару, а в запросе будет просто 200 или 401
   if (!token) {
-    res.status(HTTP_UNAUTHORIZE).json({ error: 'Access токен не найден' });
+    res.status(HTTP_UNAUTHORIZE).json({ error: 'Токен доступа не найден' });
     return;
   }
 
   jwt.verify(token, SECRET, (err, decoded) => {
     if (err) {
-      res.status(HTTP_UNAUTHORIZE);
-      res.json({ err });
+      res.status(HTTP_UNAUTHORIZE).json({ err });
       return;
     }
 

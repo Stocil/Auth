@@ -1,4 +1,5 @@
 import { apiRouter } from 'api/routes';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 
@@ -9,8 +10,7 @@ const corsOptions = {
   origin: [frontEndUrl],
 };
 
-app.use(cors(corsOptions));
-app.use(express.json());
+app.use(cors(corsOptions), express.json(), cookieParser());
 
 // Роуты
 app.use('/api', apiRouter);
