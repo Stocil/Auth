@@ -19,7 +19,6 @@ export const signIn = (req: Request, res: Response) => {
   const user: UserLoginRequest = req.body;
   const currentUser = getUserByLogin(user.login);
 
-  // TODO Добавить проверку на access токен, логинить если токен валиден
   if (!currentUser || currentUser.password !== user.password) {
     res.status(HTTP_INVALID_DATA).json({ error: 'Неверный логин или пароль' });
     return;

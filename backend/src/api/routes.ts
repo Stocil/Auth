@@ -1,4 +1,5 @@
 import express from 'express';
+import { authenticateToken } from 'middleware/authenticate-token';
 
 import { access } from './token/access';
 import { refresh } from './token/refresh';
@@ -12,5 +13,5 @@ apiRouter.route('/sign-up').put(signUp);
 apiRouter.route('/sign-in').post(signIn);
 
 // Роуты для токенов
-apiRouter.route('/access').get(access);
+apiRouter.route('/access').get(authenticateToken, access);
 apiRouter.route('/refresh').get(refresh);
