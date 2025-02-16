@@ -8,6 +8,7 @@
     "sourceMap": true,
     "baseUrl": "src",
 
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
