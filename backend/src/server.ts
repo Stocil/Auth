@@ -3,11 +3,11 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 
-import { PORT, frontEndUrl } from 'constants/index';
+import { FRONTEND_URL, PORT } from 'constants/index';
 
 const app = express();
 const corsOptions = {
-  origin: [frontEndUrl],
+  origin: [FRONTEND_URL],
 };
 
 app.use(cors(corsOptions), express.json(), cookieParser());
