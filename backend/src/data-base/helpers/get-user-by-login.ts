@@ -16,7 +16,7 @@ export const getUserByLogin: Helper = (login) => {
     }
   }
 
-  if (!userId) return null;
+  if (userId === null) return null;
 
   return getUserById(userId) ?? null;
 };

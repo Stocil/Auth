@@ -20,25 +20,22 @@ export const authApi = baseApi.enhanceEndpoints({}).injectEndpoints({
       Auth.Methods.LoginUser.Request
     >({
       query: (body) => ({
-        url: 'login',
+        url: 'sign-in',
         method: 'POST',
         body,
       }),
     }),
 
-    logoutUser: builder.mutation<
-      Auth.Methods.LogoutUser.Response,
-      Auth.Methods.LogoutUser.Request
-    >({
-      query: (body) => ({
-        url: 'logout',
-        method: 'POST',
-        body,
-      }),
+    logoutUser: builder.mutation<void, void>({
+      query: () => 'logout',
     }),
 
     refreshUserToken: builder.mutation({
       query: () => 'refresh',
+    }),
+
+    checkUserAccess: builder.query<void, void>({
+      query: () => 'access',
     }),
   }),
 });
@@ -48,4 +45,5 @@ export const {
   useLoginUserMutation,
   useLogoutUserMutation,
   useRefreshUserTokenMutation,
+  useCheckUserAccessQuery,
 } = authApi;

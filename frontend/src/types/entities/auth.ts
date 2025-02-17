@@ -5,20 +5,17 @@ export namespace Auth {
     password: string;
   };
 
+  export type UserInfo = Omit<Entity, 'password'>;
+
   export namespace Methods {
     export namespace RegisterUser {
       export type Request = Entity;
-      export type Response = Entity;
+      export type Response = UserInfo;
     }
 
     export namespace LoginUser {
       export type Request = Omit<Entity, 'email'>;
-      export type Response = Entity;
-    }
-
-    export namespace LogoutUser {
-      export type Request = { login: Entity['login'] };
-      export type Response = void;
+      export type Response = UserInfo;
     }
   }
 }

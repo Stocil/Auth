@@ -6,7 +6,9 @@ import { setUserLogin } from 'store/user/slice';
 
 import { routesPaths } from 'routes/routes';
 
-import { AuthFormEventType, FormFields } from '../types';
+import { setCookieToken } from 'utils/token';
+
+import { AuthFormEventType } from '../types';
 
 type Hook = () => {
   isLoginPage: boolean;
@@ -23,7 +25,7 @@ export const useAuthUser: Hook = () => {
   const navigate = useNavigate();
 
   const { state }: Location<LocationStateType> = useLocation();
-  const prevPath = state?.prevPath;
+  const prevPath = state?.prevPath ?? routesPaths.main;
 
   const { pathname } = useLocation();
   const isLoginPage = pathname === routesPaths.signIn;
@@ -32,14 +34,8 @@ export const useAuthUser: Hook = () => {
   const [registerUser, { isLoading: isRegisterLoading }] =
     useRegisterUserMutation();
 
-  const onSuccess = (fields: FormFields) => {
-    fields.login.value = '';
-    fields.password.value = '';
-
-    if (fields.email) {
-      fields.email.value = '';
-    }
-
+  const onSuccess = (token: string) => {
+    setCookieToken(token);
     navigate({ pathname: prevPath });
   };
 
@@ -58,7 +54,7 @@ export const useAuthUser: Hook = () => {
       .unwrap()
       .then((data) => {
         dispatch(setUserLogin(data));
-        onSuccess({ login, password });
+        onSuccess(String(data));
       });
   };
 
@@ -78,7 +74,7 @@ export const useAuthUser: Hook = () => {
       .unwrap()
       .then((data) => {
         dispatch(setUserLogin(data));
-        onSuccess({ login, password, email });
+        onSuccess(String(data));
       });
   };
 
