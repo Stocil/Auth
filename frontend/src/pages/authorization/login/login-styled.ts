@@ -24,3 +24,9 @@ export const LoginFormFooter = styled('div')`
   align-items: center;
   gap: 20px;
 `;
+
+export const LoginFooterButtons = styled('div')`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
