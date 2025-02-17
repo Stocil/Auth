@@ -4,7 +4,7 @@ import { useLogoutUserMutation } from 'store/api/auth';
 import { getUserInfo, getUserIsLoggin } from 'store/user/selectors';
 import { setUserLogout } from 'store/user/slice';
 
-import { deleteLocalStorageToken } from 'utils/token';
+import { deleteCookieToken } from 'utils/token';
 
 export const useLogout = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export const useLogout = () => {
 
   const logout = () => {
     dispatch(setUserLogout());
-    deleteLocalStorageToken();
+    deleteCookieToken();
     logoutUser({ login: String(userLogin) });
   };
 

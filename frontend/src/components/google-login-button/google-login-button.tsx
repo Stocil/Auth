@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
-import { setLocalStorageToken } from 'utils/token';
+import { setCookieToken } from 'utils/token';
 
 type Props = {
   isLoginPage: boolean;
@@ -10,7 +10,7 @@ type Props = {
 
 export const GoogleLoginButton: FC<Props> = ({ isLoginPage }) => {
   const onSuccess = ({ credential }: CredentialResponse) => {
-    setLocalStorageToken(String(credential));
+    setCookieToken(String(credential));
   };
 
   const onError = () => {
