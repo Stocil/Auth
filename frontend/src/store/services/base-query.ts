@@ -7,14 +7,14 @@ import {
 } from '@reduxjs/toolkit/query';
 
 import { HttpCodes } from 'utils/http-codes';
-import { getTokenFromLocalStorage } from 'utils/token';
+import { getTokenFromCookie } from 'utils/token';
 
 import { baseUrl } from '../api/constants';
 
 export const baseQueryConfig: FetchBaseQueryArgs = {
   baseUrl: baseUrl,
   prepareHeaders: (headers) => {
-    const token = getTokenFromLocalStorage();
+    const token = getTokenFromCookie();
 
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
