@@ -1,18 +1,12 @@
 import { FC } from 'react';
 
-import { SxProps, Typography } from '@mui/material';
-
-import { Button } from 'components/button';
-import { Divider } from 'components/divider';
-import { GoogleLoginButton } from 'components/google-login-button';
-import { Input } from 'components/input';
-import { Link } from 'components/link';
-
-import { routesPaths } from 'routes/routes';
+import { SxProps } from '@mui/material';
 
 import { AuthFormEventType } from '../types';
+import { LoginFooter } from './login-footer';
 import { LoginHeader } from './login-header';
-import { LoginForm, LoginFormFooter, StyledPaper } from './login-styled';
+import { LoginInputs } from './login-inputs';
+import { LoginForm, StyledPaper } from './login-styled';
 
 type Props = {
   isLoginPage: boolean;
@@ -25,48 +19,19 @@ const sx: SxProps = {
 };
 
 export const Login: FC<Props> = ({ isLoginPage, isLoading, onSubmit }) => {
-  const buttonText = isLoginPage ? 'Войти' : 'Зарегистрироваться';
-  const tiptext = isLoginPage
-    ? 'Нет аккаунта, зарегистрироваться?'
-    : 'Есть аккаунт, войти?';
-  const linkTo = isLoginPage ? routesPaths.signUp : routesPaths.signIn;
-
   return (
     <StyledPaper>
       <LoginHeader isLoginPage={isLoginPage} />
 
       <LoginForm onSubmit={onSubmit}>
-        <Input name='login' placeholder='Логин' required sx={sx} />
-
-        {!isLoginPage && (
-          <Input
-            name='email'
-            type='email'
-            placeholder='Почта'
-            required
-            sx={sx}
-          />
-        )}
-
-        <Input
-          name='password'
-          type='password'
-          placeholder='Пароль'
-          required
-          sx={sx}
+        <LoginInputs
+          isLoginPage={isLoginPage}
+          isLoading={isLoading}
+          inputSx={sx}
         />
-
-        <Button type='submit' text={buttonText} disabled={isLoading} />
       </LoginForm>
 
-      <LoginFormFooter>
-        <Divider sx={sx} />
-
-        <Typography variant='body2' color='primary'>
-          <Link linkTo={linkTo}>{tiptext}</Link>
-        </Typography>
-        <GoogleLoginButton isLoginPage={isLoginPage} />
-      </LoginFormFooter>
+      <LoginFooter isLoginPage={isLoginPage} dividerSx={sx} />
     </StyledPaper>
   );
 };

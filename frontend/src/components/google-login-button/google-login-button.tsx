@@ -22,10 +22,10 @@ export const GoogleLoginButton: FC<Props> = ({ isLoginPage }) => {
       onSuccess={onSuccess}
       onError={onError}
       size='large'
-      shape='circle'
-      theme='filled_blue'
+      shape='pill'
+      theme='filled_black'
       text={isLoginPage ? 'signin_with' : 'signup_with'}
-      width={350}
+      type='icon'
     />
   );
 };
