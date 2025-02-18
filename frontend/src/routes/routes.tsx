@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
 
+import { PrivateRoute } from 'features/private-route/private-route';
+
 import { Authorization } from 'pages/authorization';
 import { HomePage } from 'pages/homepage';
-
-import { PrivateRoute } from './private-route';
 
 type Route = {
   path: string;
