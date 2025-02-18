@@ -10,7 +10,6 @@ export const useLogout = () => {
   const dispatch = useDispatch();
 
   const isLogin = useSelector(getUserIsLoggin);
-
   const [logoutUser] = useLogoutUserMutation();
 
   const logout = () => {
