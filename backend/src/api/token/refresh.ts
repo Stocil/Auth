@@ -11,7 +11,7 @@ import { SECRET } from 'constants/index';
 type Token = string | undefined;
 
 export const refresh = (req: Request, res: Response) => {
-  const token: Token = req.cookies?.token;
+  const token: Token = req.cookies?.cookieToken;
 
   if (!token) {
     res
@@ -21,9 +21,12 @@ export const refresh = (req: Request, res: Response) => {
     return;
   }
 
+  console.log(`Рефреш токен из кук получен: ${token}\n`);
+
   jwt.verify(token, SECRET, (err, decoded) => {
     if (err) {
       res
+        .clearCookie('cookieToken')
         .clearCookie('token')
         .status(HTTP_UNAUTHORIZE)
         .json({
@@ -43,6 +46,6 @@ export const refresh = (req: Request, res: Response) => {
 
     const { accessToken } = generateTokens(userData);
 
-    res.json(accessToken);
+    res.cookie('token', accessToken).json(accessToken);
   });
 };

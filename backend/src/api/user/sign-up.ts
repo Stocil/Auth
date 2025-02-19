@@ -25,6 +25,6 @@ export const signUp = (req: Request, res: Response) => {
   addUserToDB(user);
   const { accessToken, refreshToken } = generateTokens(userJWTData);
 
-  console.log('Register user:', user);
-  res.cookie('token', refreshToken, { httpOnly: true }).json(accessToken);
+  console.log(`Register user\n`);
+  res.cookie('cookieToken', refreshToken, { httpOnly: true }).json(accessToken);
 };

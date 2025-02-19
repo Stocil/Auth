@@ -13,6 +13,8 @@ export const authenticateToken = (
 
   const token = headers.authorization?.split(' ')[1];
 
+  console.log('Access request\n');
+
   if (!token) {
     res.status(HTTP_UNAUTHORIZE).json({ error: 'Токен доступа не найден' });
     return;

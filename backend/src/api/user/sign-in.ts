@@ -31,6 +31,6 @@ export const signIn = (req: Request, res: Response) => {
 
   const { accessToken, refreshToken } = generateTokens(userJWTData);
 
-  console.log('Login user:', currentUser);
-  res.cookie('token', refreshToken, { httpOnly: true }).json(accessToken);
+  console.log(`Login user\n`);
+  res.cookie('cookieToken', refreshToken, { httpOnly: true }).json(accessToken);
 };

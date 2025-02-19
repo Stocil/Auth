@@ -1,13 +1,14 @@
 import { apiRouter } from 'api/routes';
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
+import cors, { CorsOptions } from 'cors';
 import express from 'express';
 
 import { FRONTEND_URL, PORT } from 'constants/index';
 
 const app = express();
-const corsOptions = {
+const corsOptions: CorsOptions = {
   origin: [FRONTEND_URL],
+  credentials: true,
 };
 
 app.use(cors(corsOptions), express.json(), cookieParser());

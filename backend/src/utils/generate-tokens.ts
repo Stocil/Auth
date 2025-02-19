@@ -12,5 +12,9 @@ export const generateTokens = (data: Props) => {
   });
   const refreshToken = jwt.sign(data, SECRET, { expiresIn: REFRESH_EXP_IN });
 
+  console.log('\nGenerate new tokens request \n');
+  console.log(`Access  ${accessToken}\n`);
+  console.log(`Refresh  ${refreshToken}\n`);
+
   return { accessToken, refreshToken };
 };
