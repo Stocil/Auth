@@ -11,6 +11,11 @@ import { getTokenFromCookie } from 'utils/token';
 
 import { baseUrl } from '../api/constants';
 
+export const refreshToken = async () =>
+  fetch(`${baseUrl}/refresh`, {
+    credentials: 'include',
+  });
+
 export const baseQueryConfig: FetchBaseQueryArgs = {
   baseUrl: baseUrl,
   prepareHeaders: (headers) => {
@@ -22,6 +27,7 @@ export const baseQueryConfig: FetchBaseQueryArgs = {
 
     return headers;
   },
+  credentials: 'include',
 };
 
 const baseQuery = fetchBaseQuery(baseQueryConfig);
@@ -45,7 +51,7 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQuery(preparedArgs, api, extraOptions);
 
   if (result.error && result.error.status === HttpCodes.UNAUTHORIZED) {
-    // await refreshToken(); TODO: Рефрешить токен тут, если токен не валидируется, то убирать его из локал стора
+    await refreshToken();
     result = await baseQuery(preparedArgs, api, extraOptions);
   }
 
