@@ -6,16 +6,21 @@ import { setUserLogout } from 'store/user/slice';
 
 import { deleteCookieToken } from 'utils/token';
 
+import { useSnackbar } from './use-snackbar';
+
 export const useLogout = () => {
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const isLogin = useSelector(getUserIsLoggin);
   const [logoutUser] = useLogoutUserMutation();
 
   const logout = () => {
-    dispatch(setUserLogout());
-    deleteCookieToken();
-    logoutUser();
+    logoutUser().then(() => {
+      dispatch(setUserLogout());
+      deleteCookieToken();
+      enqueueSnackbar('Успешный выход из аккаунта');
+    });
   };
 
   return { isLogin, logout };

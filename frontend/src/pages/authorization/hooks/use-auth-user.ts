@@ -1,8 +1,12 @@
+import { DefaultServerError } from 'types';
+
 import { useDispatch } from 'react-redux';
 import { Location, useLocation, useNavigate } from 'react-router';
 
 import { useLoginUserMutation, useRegisterUserMutation } from 'store/api/auth';
 import { setUserLogin } from 'store/user/slice';
+
+import { useSnackbar } from 'hooks/use-snackbar';
 
 import { routesPaths } from 'routes/routes';
 
@@ -23,6 +27,7 @@ type LocationStateType = {
 export const useAuthUser: Hook = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const { state }: Location<LocationStateType> = useLocation();
   const prevPath = state?.prevPath ?? routesPaths.main;
@@ -55,6 +60,10 @@ export const useAuthUser: Hook = () => {
       .then((data) => {
         dispatch(setUserLogin(data));
         onSuccess(String(data));
+      })
+      .catch((e: DefaultServerError) => {
+        const message = e.data?.error;
+        enqueueSnackbar(message, { variant: 'error' });
       });
   };
 
@@ -75,6 +84,10 @@ export const useAuthUser: Hook = () => {
       .then((data) => {
         dispatch(setUserLogin(data));
         onSuccess(String(data));
+      })
+      .catch((e: DefaultServerError) => {
+        const message = e.data?.error;
+        enqueueSnackbar(message, { variant: 'error' });
       });
   };
 

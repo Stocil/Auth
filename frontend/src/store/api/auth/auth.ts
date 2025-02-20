@@ -30,10 +30,6 @@ export const authApi = baseApi.enhanceEndpoints({}).injectEndpoints({
       query: () => 'logout',
     }),
 
-    refreshUserToken: builder.mutation({
-      query: () => 'refresh',
-    }),
-
     checkUserAccess: builder.query<void, void>({
       query: () => 'access',
     }),
@@ -44,6 +40,5 @@ export const {
   useRegisterUserMutation,
   useLoginUserMutation,
   useLogoutUserMutation,
-  useRefreshUserTokenMutation,
   useCheckUserAccessQuery,
 } = authApi;
