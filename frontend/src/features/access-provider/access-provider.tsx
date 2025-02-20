@@ -11,7 +11,7 @@ export const AccessProvider = ({ children }: PropsWithChildren) => {
   const dispatch = useDispatch();
   const userData = getUserDataFromToken();
 
-  // // Скипаем запрос, если нет Access токена
+  // Скипаем запрос, если нет Access токена
   const { isSuccess } = useCheckUserAccessQuery(undefined, { skip: !userData });
 
   useEffect(() => {

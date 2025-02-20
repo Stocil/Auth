@@ -1,10 +1,11 @@
 import { StrictMode } from 'react';
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { SnackbarProvider } from 'notistack';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import { AccessProvider } from 'components/access-provider';
+import { AccessProvider } from 'features/access-provider';
 
 import { clientId } from './constants';
 import { Router } from './routes';
@@ -17,7 +18,9 @@ createRoot(document.getElementById('root')!).render(
       <GoogleOAuthProvider clientId={clientId}>
         <AccessProvider>
           <ThemeModeProvider>
-            <Router />
+            <SnackbarProvider>
+              <Router />
+            </SnackbarProvider>
           </ThemeModeProvider>
         </AccessProvider>
       </GoogleOAuthProvider>
