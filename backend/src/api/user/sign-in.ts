@@ -1,4 +1,4 @@
-import { UserLoginRequest } from 'types/users';
+import { UserLoginRequest, UserLoginResponse } from 'types/users';
 
 import { getUserByLogin } from 'data-base/helpers/get-user-by-login';
 import { Request, Response } from 'express';
@@ -36,9 +36,10 @@ export const signIn = (req: Request, res: Response) => {
     return;
   }
 
-  const userJWTData = {
+  const userJWTData: UserLoginResponse = {
     login: currentUser.login,
     email: currentUser.email,
+    avatar: currentUser.avatar,
   };
 
   const { accessToken, refreshToken } = generateTokens(userJWTData);

@@ -39,9 +39,10 @@ export const refresh = (req: Request, res: Response) => {
     }
 
     const user = decoded as UserLoginResponse;
-    const userData = {
+    const userData: UserLoginResponse = {
       login: user.login,
       email: user.email,
+      avatar: user.avatar,
     };
 
     const { accessToken } = generateTokens(userData);

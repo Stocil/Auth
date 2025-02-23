@@ -3,6 +3,7 @@ import { Nullable } from 'types';
 export type UserInfo = {
   login: string;
   email: string;
+  avatar: Nullable<string>;
 };
 
 export type UserInfoWithToken = UserInfo & {

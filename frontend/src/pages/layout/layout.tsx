@@ -33,7 +33,11 @@ export const Layout: FC = () => {
         )}
 
         {isLogin && (
-          <AppBarUserActions onLogout={logout} login={userInfo?.login} />
+          <AppBarUserActions
+            onLogout={logout}
+            login={String(userInfo?.login)}
+            avatar={userInfo?.avatar}
+          />
         )}
       </AppBar>
 

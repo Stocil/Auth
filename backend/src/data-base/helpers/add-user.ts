@@ -1,10 +1,11 @@
-import { UserRaw } from 'types/users';
+import { NewUser, User } from 'types/users';
 
 import { id, increaseId, usersBd } from 'data-base/data-base';
 
-export const addUserToDB = (user: UserRaw) => {
-  const newUser = {
+export const addUserToDB = (user: NewUser) => {
+  const newUser: User = {
     ...user,
+    avatar: null,
     id,
   };
 

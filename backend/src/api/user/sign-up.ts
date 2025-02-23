@@ -1,4 +1,4 @@
-import { UserRaw } from 'types/users';
+import { NewUser, UserLoginResponse } from 'types/users';
 
 import { addUserToDB } from 'data-base/helpers/add-user';
 import { getUserByLogin } from 'data-base/helpers/get-user-by-login';
@@ -17,10 +17,11 @@ export const signUp = (req: Request, res: Response) => {
     return;
   }
 
-  const user: UserRaw = req.body;
-  const userJWTData = {
+  const user: NewUser = req.body;
+  const userJWTData: UserLoginResponse = {
     login: user.login,
     email: user.email,
+    avatar: null,
   };
 
   const isUserExist = !!getUserByLogin(user.login);
