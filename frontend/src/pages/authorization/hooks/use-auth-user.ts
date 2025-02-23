@@ -1,5 +1,6 @@
 import { DefaultServerError } from 'types';
 
+import { SubmitHandler, useFormContext } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Location, useLocation, useNavigate } from 'react-router';
 
@@ -10,13 +11,15 @@ import { useSnackbar } from 'hooks/use-snackbar';
 
 import { routesPaths } from 'routes/routes';
 
+import { HttpCodes } from 'utils/http-codes';
 import { setCookieToken } from 'utils/token';
 
-import { AuthFormEventType } from '../types';
+import { authorizationFormTexts, loginVariants } from '../login/constants';
+import { AuthFormInputs } from '../types';
 
 type Hook = () => {
   isLoginPage: boolean;
-  onSubmit: (e: AuthFormEventType) => void;
+  onSubmit: SubmitHandler<AuthFormInputs>;
   isLoading: boolean;
 };
 
@@ -29,10 +32,10 @@ export const useAuthUser: Hook = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { state }: Location<LocationStateType> = useLocation();
-  const prevPath = state?.prevPath ?? routesPaths.main;
+  const { getValues, setError } = useFormContext<AuthFormInputs>();
 
-  const { pathname } = useLocation();
+  const { state, pathname }: Location<LocationStateType> = useLocation();
+  const prevPath = state?.prevPath ?? routesPaths.main;
   const isLoginPage = pathname === routesPaths.signIn;
 
   const [loginUser, { isLoading: isLoginLoading }] = useLoginUserMutation();
@@ -40,19 +43,22 @@ export const useAuthUser: Hook = () => {
     useRegisterUserMutation();
 
   const onSuccess = (token: string) => {
+    const { successSnack } = authorizationFormTexts;
+    const successMessage = isLoginPage
+      ? successSnack[loginVariants.signIn]
+      : successSnack[loginVariants.signUp];
+
     setCookieToken(token);
+    enqueueSnackbar(successMessage);
     navigate({ pathname: prevPath });
   };
 
-  const onLoginUser = (e: AuthFormEventType) => {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    const { login, password } = form;
+  const onLoginUser = () => {
+    const { login, password } = getValues();
 
     const loginData = {
-      login: login.value,
-      password: password.value,
+      login: login,
+      password: password,
     };
 
     loginUser(loginData)
@@ -64,19 +70,38 @@ export const useAuthUser: Hook = () => {
       .catch((e: DefaultServerError) => {
         const message = e.data?.error;
         enqueueSnackbar(message, { variant: 'error' });
+
+        if (e.status === HttpCodes.CONFLICT) {
+          setError('login', {
+            type: 'custom',
+            message: message,
+          });
+        }
       });
   };
 
-  const onRegisterUser = (e: AuthFormEventType) => {
-    e.preventDefault();
+  const onRegisterUser = () => {
+    const { login, password, email, repeatPassword } = getValues();
 
-    const form = e.currentTarget;
-    const { login, email, password } = form;
+    if (password !== repeatPassword) {
+      const message = authorizationFormTexts.validationErrors.passwordDontMatch;
+
+      setError('password', {
+        type: 'custom',
+        message: message,
+      });
+      setError('repeatPassword', {
+        type: 'custom',
+        message: message,
+      });
+
+      return;
+    }
 
     const registerData = {
-      login: login.value,
-      email: String(email?.value),
-      password: password.value,
+      login: login,
+      email: String(email),
+      password: password,
     };
 
     registerUser(registerData)
@@ -88,10 +113,14 @@ export const useAuthUser: Hook = () => {
       .catch((e: DefaultServerError) => {
         const message = e.data?.error;
         enqueueSnackbar(message, { variant: 'error' });
+
+        setError('login', {
+          type: 'custom',
+          message: message,
+        });
       });
   };
 
-  // TODO: В then добавить редирект на callBack страницу
   const onSubmit = isLoginPage ? onLoginUser : onRegisterUser;
   const isLoading = isLoginLoading || isRegisterLoading;
 

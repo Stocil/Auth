@@ -1,9 +1,6 @@
-import { FormEvent } from 'react';
-
-export type FormFields = {
-  login: HTMLInputElement;
-  email?: HTMLInputElement;
-  password: HTMLInputElement;
+export type AuthFormInputs = {
+  login: string;
+  email?: string;
+  password: string;
+  repeatPassword?: string;
 };
-
-export type AuthFormEventType = FormEvent<HTMLFormElement & FormFields>;
