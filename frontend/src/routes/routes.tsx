@@ -10,7 +10,7 @@ type Route = {
   element: ReactElement;
 };
 
-enum routesKeys {
+export enum routesKeys {
   main = 'main',
   signIn = 'signIn',
   signUp = 'signUp',

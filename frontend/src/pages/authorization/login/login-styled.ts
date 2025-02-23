@@ -1,21 +1,22 @@
 import { Paper, styled } from '@mui/material';
 
 export const StyledPaper = styled(Paper)`
-  width: 450px;
-  height: 500px;
-  padding: 30px;
+  padding: 20px 30px;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
+  gap: 30px;
+
+  text-align: center;
 `;
 
 export const LoginForm = styled('form')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
+  width: 350px;
 `;
 
 export const LoginFormFooter = styled('div')`

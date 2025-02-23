@@ -1,37 +1,37 @@
 import { FC } from 'react';
 
-import { SxProps } from '@mui/material';
+import { FormProvider, useForm } from 'react-hook-form';
 
-import { AuthFormEventType } from '../types';
+import { AuthFormInputs } from '../types';
+import { authorizationFormTexts, loginVariants } from './constants';
+import { AuthorizationForm } from './form';
 import { LoginFooter } from './login-footer';
 import { LoginHeader } from './login-header';
-import { LoginInputs } from './login-inputs';
-import { LoginForm, StyledPaper } from './login-styled';
+import { StyledPaper } from './login-styled';
 
 type Props = {
   isLoginPage: boolean;
-  onSubmit: (e: AuthFormEventType) => void;
-  isLoading: boolean;
 };
 
-const sx: SxProps = {
-  width: 350,
-};
+export const Login: FC<Props> = ({ isLoginPage }) => {
+  const methods = useForm<AuthFormInputs>();
 
-export const Login: FC<Props> = ({ isLoginPage, isLoading, onSubmit }) => {
+  const { footer, title, footerRoute } = authorizationFormTexts;
+  const currentPage = isLoginPage ? loginVariants.signIn : loginVariants.signUp;
+
+  const headerTitle = title[currentPage];
+  const tipText = footer[currentPage];
+  const link = footerRoute[currentPage];
+
   return (
     <StyledPaper>
-      <LoginHeader isLoginPage={isLoginPage} />
+      <LoginHeader title={headerTitle} />
 
-      <LoginForm onSubmit={onSubmit}>
-        <LoginInputs
-          isLoginPage={isLoginPage}
-          isLoading={isLoading}
-          inputSx={sx}
-        />
-      </LoginForm>
+      <FormProvider {...methods}>
+        <AuthorizationForm />
+      </FormProvider>
 
-      <LoginFooter isLoginPage={isLoginPage} dividerSx={sx} />
+      <LoginFooter link={link} tipText={tipText} />
     </StyledPaper>
   );
 };

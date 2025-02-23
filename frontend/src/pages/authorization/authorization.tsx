@@ -1,22 +1,21 @@
+import { useLocation } from 'react-router';
+
 import { useLogout } from 'hooks/use-logout';
 
-import { useAuthUser } from './hooks';
+import { routesPaths } from 'routes/routes';
+
 import { Login } from './login';
 import { LogoutInfo } from './logout';
 
 export const Authorization = () => {
-  const { isLoginPage, onSubmit, isLoading } = useAuthUser();
+  const { pathname } = useLocation();
+  const isLoginPage = pathname === routesPaths.signIn;
+
   const { isLogin, logout } = useLogout();
 
   if (isLogin) {
     return <LogoutInfo onLogout={logout} />;
   }
 
-  return (
-    <Login
-      isLoading={isLoading}
-      isLoginPage={isLoginPage}
-      onSubmit={onSubmit}
-    />
-  );
+  return <Login isLoginPage={isLoginPage} />;
 };

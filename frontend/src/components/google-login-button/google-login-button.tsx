@@ -4,11 +4,7 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
 import { setCookieToken } from 'utils/token';
 
-type Props = {
-  isLoginPage: boolean;
-};
-
-export const GoogleLoginButton: FC<Props> = ({ isLoginPage }) => {
+export const GoogleLoginButton: FC = () => {
   const onSuccess = ({ credential }: CredentialResponse) => {
     setCookieToken(String(credential));
   };
@@ -24,7 +20,6 @@ export const GoogleLoginButton: FC<Props> = ({ isLoginPage }) => {
       size='large'
       shape='pill'
       theme='filled_black'
-      text={isLoginPage ? 'signin_with' : 'signup_with'}
       type='icon'
     />
   );
