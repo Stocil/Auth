@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { SxProps } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { IconButton } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router';
 
 import { useLogout } from 'hooks/use-logout';
@@ -12,29 +13,26 @@ import { routesPaths } from 'routes/routes';
 
 import { Container, PageStyled } from './page-styles';
 
-const sx: SxProps = {
-  padding: '4px 8px',
-};
-
 export const Layout: FC = () => {
   const navigate = useNavigate();
   const { isLogin, logout } = useLogout();
 
-  const handleAuthorization = () => {
-    if (isLogin) {
-      logout();
-      return;
-    }
-
+  const navigateToAuthorizationPage = () => {
     navigate(routesPaths.signIn);
   };
-
-  const buttonText = isLogin ? 'Выйти' : 'Войти';
 
   return (
     <PageStyled>
       <AppBar>
-        <Button onClick={handleAuthorization} text={buttonText} sx={sx} />
+        {!isLogin && (
+          <Button onClick={navigateToAuthorizationPage} text='Войти' />
+        )}
+
+        {isLogin && (
+          <IconButton onClick={logout} edge='start'>
+            <LogoutIcon />
+          </IconButton>
+        )}
       </AppBar>
 
       <Container>
