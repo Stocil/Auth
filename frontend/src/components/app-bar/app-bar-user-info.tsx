@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { Nullable } from 'types';
+
 import LogoutIcon from '@mui/icons-material/Logout';
 import { IconButton, Typography } from '@mui/material';
 
@@ -13,11 +15,12 @@ import { Link } from 'components/link';
 import { routesPaths } from 'routes/routes';
 
 type Props = {
+  login: string;
+  avatar: Nullable<string>;
   onLogout: () => void;
-  login?: string;
 };
 
-export const AppBarUserActions: FC<Props> = ({ onLogout, login }) => {
+export const AppBarUserActions: FC<Props> = ({ login, avatar, onLogout }) => {
   return (
     <AppBarUserActionsWrapper>
       <AppBarUserInfo>
@@ -25,11 +28,10 @@ export const AppBarUserActions: FC<Props> = ({ onLogout, login }) => {
           {login}
         </Typography>
 
-        {
-          // TODO: Добавить url картинки юзера, после добавления url на БЕ
-        }
         <Link linkTo={routesPaths.profile}>
-          <AppBarUserInfoAvatar>{login?.[0]}</AppBarUserInfoAvatar>
+          <AppBarUserInfoAvatar src={avatar ?? ''}>
+            {!avatar && login?.[0]}
+          </AppBarUserInfoAvatar>
         </Link>
       </AppBarUserInfo>
 
