@@ -5,8 +5,6 @@ import { Nullable } from 'types';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { IconButton, Typography } from '@mui/material';
 
-import { UserInfo } from 'store/user/types';
-
 import {
   AppBarUserActionsWrapper,
   AppBarUserInfo,
