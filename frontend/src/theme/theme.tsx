@@ -41,13 +41,12 @@ export const ThemeModeProvider = ({ children }: ThemeProps) => {
         main: '#eda7f1',
       },
       typography: {
-        main: indigo[200],
+        main: '#b3b3b3',
+        contrastText: indigo[200],
       },
       background: {
-        // default: "#171717", nice colors
-        // paper: "#171717",
-        default: '#1a1d24',
-        paper: '#1a1d24',
+        default: '#0d0d0d',
+        paper: '#0e0e0e',
       },
     },
 
@@ -85,6 +84,7 @@ export const ThemeModeProvider = ({ children }: ThemeProps) => {
         styleOverrides: {
           root: {
             textTransform: 'none',
+            padding: '4px 8px',
           },
         },
       },

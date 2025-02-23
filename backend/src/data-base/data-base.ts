@@ -6,7 +6,7 @@ const testUsers: Array<[number, User]> = [
     {
       login: 'test',
       email: 'test@mail.ru',
-      password: 'test',
+      password: '123456',
       id: 0,
     },
   ],
@@ -15,7 +15,7 @@ const testUsers: Array<[number, User]> = [
     {
       login: 'test1',
       email: 'test1@mail.ru',
-      password: 'test1',
+      password: '123456',
       id: 1,
     },
   ],
@@ -24,7 +24,7 @@ const testUsers: Array<[number, User]> = [
     {
       login: 'test2',
       email: 'tes2@mail.ru',
-      password: 'test2',
+      password: '123456',
       id: 2,
     },
   ],

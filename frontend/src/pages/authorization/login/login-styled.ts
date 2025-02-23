@@ -2,6 +2,8 @@ import { Paper, styled } from '@mui/material';
 
 export const StyledPaper = styled(Paper)`
   padding: 20px 30px;
+  border-radius: 30px;
+  border: 1px solid ${(props) => props.theme.palette.primary.main};
 
   display: flex;
   flex-direction: column;

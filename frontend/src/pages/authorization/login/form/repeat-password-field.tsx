@@ -36,7 +36,7 @@ export const AuthorizationRepeatPasswordField = () => {
             input: {
               endAdornment: (
                 <InputAdornment position='end'>
-                  <IconButton edge='end' onClick={onClick}>
+                  <IconButton edge='end' onClick={onClick} size='small'>
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>

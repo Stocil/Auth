@@ -15,7 +15,7 @@ import { AuthorizationLoginField } from './login-field';
 import { AuthorizationPasswordField } from './password-field';
 import { AuthorizationRepeatPasswordField } from './repeat-password-field';
 
-const buttonSx: SxProps = { marginTop: 2 };
+const buttonSx: SxProps = { marginTop: 2, padding: '8px 16px' };
 
 export const AuthorizationForm: FC = () => {
   const { handleSubmit, reset } = useFormContext<AuthFormInputs>();
