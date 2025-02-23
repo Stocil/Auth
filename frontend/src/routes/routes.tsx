@@ -4,6 +4,7 @@ import { PrivateRoute } from 'features/private-route/private-route';
 
 import { Authorization } from 'pages/authorization';
 import { HomePage } from 'pages/homepage';
+import { Profile } from 'pages/profile';
 
 type Route = {
   path: string;
@@ -39,7 +40,11 @@ export const routes: Record<routesKeys, Route> = {
   },
   profile: {
     path: routesPaths.profile,
-    element: <PrivateRoute>Profile</PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <Profile />
+      </PrivateRoute>
+    ),
   },
 };
 

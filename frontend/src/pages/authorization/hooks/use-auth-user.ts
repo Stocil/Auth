@@ -12,7 +12,7 @@ import { useSnackbar } from 'hooks/use-snackbar';
 import { routesPaths } from 'routes/routes';
 
 import { HttpCodes } from 'utils/http-codes';
-import { setCookieToken } from 'utils/token';
+import { getUserDataFromToken, setCookieToken } from 'utils/token';
 
 import { authorizationFormTexts, loginVariants } from '../login/constants';
 import { AuthFormInputs } from '../types';
@@ -48,6 +48,9 @@ export const useAuthUser: Hook = () => {
       ? successSnack[loginVariants.signIn]
       : successSnack[loginVariants.signUp];
 
+    const userData = getUserDataFromToken(token);
+
+    dispatch(setUserLogin({ ...userData, token: token }));
     setCookieToken(token);
     enqueueSnackbar(successMessage);
     navigate({ pathname: prevPath });
@@ -64,8 +67,7 @@ export const useAuthUser: Hook = () => {
     loginUser(loginData)
       .unwrap()
       .then((data) => {
-        dispatch(setUserLogin(data));
-        onSuccess(String(data));
+        onSuccess(data);
       })
       .catch((e: DefaultServerError) => {
         const message = e.data?.error;
@@ -107,8 +109,7 @@ export const useAuthUser: Hook = () => {
     registerUser(registerData)
       .unwrap()
       .then((data) => {
-        dispatch(setUserLogin(data));
-        onSuccess(String(data));
+        onSuccess(data);
       })
       .catch((e: DefaultServerError) => {
         const message = e.data?.error;

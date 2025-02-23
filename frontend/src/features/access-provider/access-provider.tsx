@@ -5,18 +5,19 @@ import { useDispatch } from 'react-redux';
 import { useCheckUserAccessQuery } from 'store/api/auth';
 import { setUserLogin } from 'store/user/slice';
 
-import { getUserDataFromToken } from 'utils/token';
+import { getTokenFromCookie, getUserDataFromToken } from 'utils/token';
 
 export const AccessProvider = ({ children }: PropsWithChildren) => {
   const dispatch = useDispatch();
-  const userData = getUserDataFromToken();
+  const token = getTokenFromCookie();
 
   // Скипаем запрос, если нет Access токена
-  const { isSuccess } = useCheckUserAccessQuery(undefined, { skip: !userData });
+  const { isSuccess } = useCheckUserAccessQuery(undefined, { skip: !token });
 
   useEffect(() => {
-    if (isSuccess && userData) {
-      dispatch(setUserLogin(userData));
+    if (isSuccess && token) {
+      const userData = getUserDataFromToken(token);
+      dispatch(setUserLogin({ ...userData, token: token }));
     }
   }, [isSuccess]);
 
