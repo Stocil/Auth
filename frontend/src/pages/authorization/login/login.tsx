@@ -3,7 +3,11 @@ import { FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { AuthFormInputs } from '../types';
-import { authorizationFormTexts, loginVariants } from './constants';
+import {
+  authorizationFormDefaultValues,
+  authorizationFormTexts,
+  loginVariants,
+} from './constants';
 import { AuthorizationForm } from './form';
 import { LoginFooter } from './login-footer';
 import { LoginHeader } from './login-header';
@@ -14,7 +18,9 @@ type Props = {
 };
 
 export const Login: FC<Props> = ({ isLoginPage }) => {
-  const methods = useForm<AuthFormInputs>();
+  const methods = useForm<AuthFormInputs>({
+    defaultValues: authorizationFormDefaultValues,
+  });
 
   const { footer, title, footerRoute } = authorizationFormTexts;
   const currentPage = isLoginPage ? loginVariants.signIn : loginVariants.signUp;

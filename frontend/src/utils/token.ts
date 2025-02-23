@@ -1,6 +1,6 @@
-import { Auth } from 'types/entities/auth';
-
 import { jwtDecode } from 'jwt-decode';
+
+import { UserInfo } from 'store/user/types';
 
 export const LOCAL_STORAGE_TOKEN_NAME = 'token';
 
@@ -10,12 +10,9 @@ export const getTokenFromCookie = () =>
     .find((cookie) => cookie.startsWith('token'))
     ?.split('=')[1];
 
-export const getUserDataFromToken = () => {
-  const token = getTokenFromCookie();
-
-  if (token) {
-    return jwtDecode(token) as Auth.UserInfo;
-  }
+export const getUserDataFromToken = (token: string) => {
+  const { email, login } = jwtDecode<UserInfo>(token);
+  return { email, login };
 };
 
 export const setCookieToken = (token: string) => {
