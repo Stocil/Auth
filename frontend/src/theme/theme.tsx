@@ -48,6 +48,9 @@ export const ThemeModeProvider = ({ children }: ThemeProps) => {
         default: '#0d0d0d',
         paper: '#0e0e0e',
       },
+      text: {
+        secondary: '#b3b3b3',
+      },
     },
 
     typography: {
@@ -62,6 +65,11 @@ export const ThemeModeProvider = ({ children }: ThemeProps) => {
         defaultProps: {
           component: 'section',
           maxWidth: 'lg',
+        },
+      },
+      MuiTypography: {
+        defaultProps: {
+          component: 'p',
         },
       },
       MuiButton: {

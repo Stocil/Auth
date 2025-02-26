@@ -1,8 +1,8 @@
 import { Nullable } from 'types';
 
 export type UserInfo = {
-  login: string;
-  email: string;
+  login: Nullable<string>;
+  email: Nullable<string>;
   avatar: Nullable<string>;
 };
 
@@ -11,7 +11,7 @@ export type UserInfoWithToken = UserInfo & {
 };
 
 export type InitialState = {
-  info: Nullable<UserInfo>;
+  info: UserInfo;
   token: Nullable<string>;
   isLoggin: boolean;
 };

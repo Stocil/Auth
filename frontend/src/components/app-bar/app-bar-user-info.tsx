@@ -8,7 +8,7 @@ import { IconButton, Typography } from '@mui/material';
 import {
   AppBarUserActionsWrapper,
   AppBarUserInfo,
-  AppBarUserInfoAvatar,
+  UserInfoAvatar,
 } from 'components/app-bar/app-bar-styles';
 import { Link } from 'components/link';
 
@@ -20,24 +20,22 @@ type Props = {
   onLogout: () => void;
 };
 
-export const AppBarUserActions: FC<Props> = ({ login, avatar, onLogout }) => {
-  return (
-    <AppBarUserActionsWrapper>
-      <AppBarUserInfo>
-        <Typography variant='h6' color='primary'>
-          {login}
-        </Typography>
+export const AppBarUserActions: FC<Props> = ({ login, avatar, onLogout }) => (
+  <AppBarUserActionsWrapper>
+    <AppBarUserInfo>
+      <Typography variant='h6' color='primary'>
+        {login}
+      </Typography>
 
-        <Link linkTo={routesPaths.profile}>
-          <AppBarUserInfoAvatar src={avatar ?? ''}>
-            {!avatar && login?.[0]}
-          </AppBarUserInfoAvatar>
-        </Link>
-      </AppBarUserInfo>
+      <Link linkTo={routesPaths.profile}>
+        <UserInfoAvatar src={avatar ?? ''}>
+          {!avatar && login?.[0].toUpperCase()}
+        </UserInfoAvatar>
+      </Link>
+    </AppBarUserInfo>
 
-      <IconButton onClick={onLogout} edge='start'>
-        <LogoutIcon />
-      </IconButton>
-    </AppBarUserActionsWrapper>
-  );
-};
+    <IconButton onClick={onLogout} edge='start'>
+      <LogoutIcon />
+    </IconButton>
+  </AppBarUserActionsWrapper>
+);
