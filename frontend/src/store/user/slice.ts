@@ -3,7 +3,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { InitialState, UserInfoWithToken } from './types';
 
 const initialState: InitialState = {
-  info: null,
+  info: {
+    avatar: null,
+    email: null,
+    login: null,
+  },
   token: null,
   isLoggin: false,
 };

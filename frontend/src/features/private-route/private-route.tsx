@@ -32,7 +32,7 @@ export const PrivateRoute: FC<Props> = ({ children }) => {
   // при выходе из аккаунта в приватном роуте
   let isPageAvailable = isLogin;
 
-  if (token) {
+  if (token && !isPageAvailable) {
     // Держим пользователя на этой странице до тех пор, пока запрос не завершится
     isPageAvailable = isLoading ? true : isSuccess;
   }

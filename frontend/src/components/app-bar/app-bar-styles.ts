@@ -18,6 +18,6 @@ export const AppBarUserInfo = styled(Stack)`
   gap: 10px;
 `;
 
-export const AppBarUserInfoAvatar = styled(Avatar)`
+export const UserInfoAvatar = styled(Avatar)`
   background-color: ${(props) => props.theme.palette.primary.main};
 `;
