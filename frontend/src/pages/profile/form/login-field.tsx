@@ -4,7 +4,6 @@ import { InputField } from 'components/input-field';
 export const ProfileLoginField = () => {
   return (
     <InputField
-      // title='Логин'
       titleSize='h6'
       name='login'
       rules={{ required: true }}
