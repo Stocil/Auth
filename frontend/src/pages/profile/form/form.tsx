@@ -33,7 +33,7 @@ export const ProfileForm: FC = () => {
         </ProfileUserFieldWrapper>
       </ProfileUserFields>
 
-      <Button color='success' type='submit'>
+      <Button fullWidth color='success' type='submit'>
         Сохранить
       </Button>
     </ProfileUserForm>

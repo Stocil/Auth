@@ -1,4 +1,4 @@
-import { NewUser, UserLoginResponse } from 'types/users';
+import { User } from 'types/users';
 
 import { addUserToDB } from 'data-base/helpers/add-user';
 import { getUserByLogin } from 'data-base/helpers/get-user-by-login';
@@ -17,13 +17,7 @@ export const signUp = (req: Request, res: Response) => {
     return;
   }
 
-  const user: NewUser = req.body;
-  const userJWTData: UserLoginResponse = {
-    login: user.login,
-    email: user.email,
-    avatar: null,
-  };
-
+  const user: User.Methods.RegisterUser.Request = req.body;
   const isUserExist = !!getUserByLogin(user.login);
 
   if (isUserExist) {
@@ -34,8 +28,8 @@ export const signUp = (req: Request, res: Response) => {
     return;
   }
 
-  addUserToDB(user);
-  const { accessToken, refreshToken } = generateTokens(userJWTData);
+  const newUser = addUserToDB(user);
+  const { accessToken, refreshToken } = generateTokens(newUser);
 
   console.log(`Register user\n`);
   res.cookie('cookieToken', refreshToken, { httpOnly: true }).json(accessToken);

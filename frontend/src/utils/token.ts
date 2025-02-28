@@ -11,8 +11,8 @@ export const getTokenFromCookie = () =>
     ?.split('=')[1];
 
 export const getUserDataFromToken = (token: string) => {
-  const { email, login, avatar } = jwtDecode<UserInfo>(token);
-  return { email, login, avatar };
+  const { email, login, avatar, id } = jwtDecode<UserInfo>(token);
+  return { email, login, avatar, id };
 };
 
 export const setCookieToken = (token: string) => {

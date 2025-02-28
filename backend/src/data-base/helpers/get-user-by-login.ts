@@ -4,7 +4,7 @@ import { usersBd } from 'data-base/data-base';
 
 import { getUserById } from './get-user-by-id';
 
-type Helper = (login: User['login']) => User | null;
+type Helper = (login: User.Entity['login']) => User.Entity | null;
 
 export const getUserByLogin: Helper = (login) => {
   let userId: number | null = null;

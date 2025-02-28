@@ -1,12 +1,10 @@
-import { UserLoginResponse } from 'types/users';
+import { User } from 'types/users';
 
 import jwt from 'jsonwebtoken';
 
 import { ACCESS_EXP_IN, REFRESH_EXP_IN, SECRET } from 'constants/index';
 
-type Props = UserLoginResponse;
-
-export const generateTokens = (data: Props) => {
+export const generateTokens = (data: User.TokenData) => {
   const accessToken = jwt.sign(data, SECRET, {
     expiresIn: ACCESS_EXP_IN,
   });

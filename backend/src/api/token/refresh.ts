@@ -1,11 +1,12 @@
-import { UserLoginResponse } from 'types/users';
+import { User } from 'types/users';
 
+import { getUserById } from 'data-base/helpers/get-user-by-id';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
 import { generateTokens } from 'utils/generate-tokens';
 
-import { HTTP_UNAUTHORIZE } from 'constants/http-codes';
+import { HTTP_NOT_FOUND, HTTP_UNAUTHORIZE } from 'constants/http-codes';
 import { SECRET } from 'constants/index';
 
 type Token = string | undefined;
@@ -38,14 +39,19 @@ export const refresh = (req: Request, res: Response) => {
       return;
     }
 
-    const user = decoded as UserLoginResponse;
-    const userData: UserLoginResponse = {
-      login: user.login,
-      email: user.email,
-      avatar: user.avatar,
-    };
+    const user = decoded as User.TokenData;
+    const currentUser = getUserById(user.id);
 
-    const { accessToken } = generateTokens(userData);
+    if (!currentUser) {
+      res
+        .status(HTTP_NOT_FOUND)
+        .json({ error: 'Не удалось обновить токен, войдите в аккаунт заново' });
+
+      return;
+    }
+
+    const { password, ...currentUserJWTData } = currentUser;
+    const { accessToken } = generateTokens(currentUserJWTData);
 
     res.cookie('token', accessToken).json(accessToken);
   });

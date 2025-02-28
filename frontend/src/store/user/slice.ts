@@ -4,6 +4,7 @@ import { InitialState, UserInfoWithToken } from './types';
 
 const initialState: InitialState = {
   info: {
+    id: null,
     avatar: null,
     email: null,
     login: null,

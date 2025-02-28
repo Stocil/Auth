@@ -1,9 +1,11 @@
-import { NewUser, User } from 'types/users';
+import { User } from 'types/users';
 
 import { id, increaseId, usersBd } from 'data-base/data-base';
 
-export const addUserToDB = (user: NewUser) => {
-  const newUser: User = {
+type Helper = (user: User.Methods.RegisterUser.Request) => User.TokenData;
+
+export const addUserToDB: Helper = (user) => {
+  const newUser: User.Entity = {
     ...user,
     avatar: null,
     id,
@@ -11,4 +13,7 @@ export const addUserToDB = (user: NewUser) => {
 
   usersBd.set(id, newUser);
   increaseId();
+
+  const { password, ...newUserJWTData } = newUser;
+  return newUserJWTData;
 };

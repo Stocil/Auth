@@ -1,14 +1,28 @@
-export type UserRaw = {
-  login: string;
-  email: string;
-  password: string;
-  avatar: string | null;
-};
+export namespace User {
+  export type Entity = {
+    id: number;
+    login: string;
+    email: string;
+    password: string;
+    avatar: string | null;
+  };
 
-export type NewUser = Omit<UserRaw, 'avatar'>;
-export type UserLoginRequest = Omit<UserRaw, 'email' | 'avatar'>;
-export type UserLoginResponse = Omit<UserRaw, 'password'>;
+  export type TokenData = Omit<Entity, 'password'>;
 
-export type User = UserRaw & {
-  id: number;
-};
+  export namespace Methods {
+    export namespace RegisterUser {
+      export type Request = Omit<Entity, 'avatar' | 'id'>;
+      export type Response = TokenData;
+    }
+
+    export namespace LoginUser {
+      export type Request = Omit<Entity, 'id' | 'email' | 'avatar'>;
+      export type Response = TokenData;
+    }
+
+    export namespace EditUser {
+      export type Request = TokenData;
+      export type Response = TokenData;
+    }
+  }
+}
