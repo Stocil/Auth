@@ -1,4 +1,4 @@
-import { UserLoginRequest, UserLoginResponse } from 'types/users';
+import { User } from 'types/users';
 
 import { getUserByLogin } from 'data-base/helpers/get-user-by-login';
 import { Request, Response } from 'express';
@@ -20,7 +20,7 @@ export const signIn = (req: Request, res: Response) => {
     return;
   }
 
-  const user: UserLoginRequest = req.body;
+  const user: User.Methods.LoginUser.Request = req.body;
   const currentUser = getUserByLogin(user.login);
 
   if (!currentUser) {
@@ -31,18 +31,13 @@ export const signIn = (req: Request, res: Response) => {
     return;
   }
 
-  if (!currentUser || currentUser.password !== user.password) {
+  if (currentUser.password !== user.password) {
     res.status(HTTP_INVALID_DATA).json({ error: 'Неверный логин или пароль' });
     return;
   }
 
-  const userJWTData: UserLoginResponse = {
-    login: currentUser.login,
-    email: currentUser.email,
-    avatar: currentUser.avatar,
-  };
-
-  const { accessToken, refreshToken } = generateTokens(userJWTData);
+  const { password, ...currentUserJWTData } = currentUser;
+  const { accessToken, refreshToken } = generateTokens(currentUserJWTData);
 
   console.log(`Login user\n`);
   res.cookie('cookieToken', refreshToken, { httpOnly: true }).json(accessToken);

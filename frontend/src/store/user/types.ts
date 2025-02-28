@@ -1,6 +1,7 @@
 import { Nullable } from 'types';
 
 export type UserInfo = {
+  id: Nullable<number>;
   login: Nullable<string>;
   email: Nullable<string>;
   avatar: Nullable<string>;
