@@ -1,15 +1,34 @@
 import { User } from 'types/users';
 
+import { getUserById } from 'data-base/helpers/get-user-by-id';
 import { getUserByLogin } from 'data-base/helpers/get-user-by-login';
+import { updateUser } from 'data-base/helpers/update-user';
 import { Request, Response } from 'express';
 
-import { HTTP_CONFLICT, HTTP_NO_BODY_PROVIDED } from 'constants/http-codes';
+import { generateTokens } from 'utils/generate-tokens';
+
+import {
+  HTTP_CONFLICT,
+  HTTP_NOT_FOUND,
+  HTTP_NO_BODY_PROVIDED,
+} from 'constants/http-codes';
 
 export const editUserData = (req: Request, res: Response) => {
   if (!req.body) {
     res
       .status(HTTP_NO_BODY_PROVIDED)
       .json({ error: 'Необходимо отправить корректные данные' });
+
+    return;
+  }
+
+  const userId = Number(req.params.id);
+  const isUserExist = !!getUserById(userId);
+
+  if (!isUserExist) {
+    res
+      .status(HTTP_NOT_FOUND)
+      .json({ error: 'Пользователя c таким id не существует' });
 
     return;
   }
@@ -25,7 +44,8 @@ export const editUserData = (req: Request, res: Response) => {
     return;
   }
 
-  // TODO Обновлять данные пользователя в БД, получать новые данные
-  // TODO Создавать новый access токен с новыми данными внутри, отправлять токен на FE
-  // TODO Обновлять токен в куках на FE
+  const userNewData = updateUser(currentUserNewData);
+  const { accessToken } = generateTokens(userNewData);
+
+  res.json(accessToken);
 };
