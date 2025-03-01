@@ -4,7 +4,6 @@ import { InputField } from 'components/input-field';
 export const ProfileEmailField = () => {
   return (
     <InputField
-      // title='Email'
       titleSize='h6'
       name='email'
       rules={{ required: true }}
@@ -15,7 +14,6 @@ export const ProfileEmailField = () => {
           value={field.value}
           onChange={field.onChange}
           variant='outlined'
-          size='medium'
         />
       )}
     />

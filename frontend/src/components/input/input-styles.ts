@@ -1,4 +1,4 @@
-import { styled, TextField } from '@mui/material';
+import { TextField, styled } from '@mui/material';
 
 export const StyledInput = styled(TextField)`
   & .MuiOutlinedInput-root {

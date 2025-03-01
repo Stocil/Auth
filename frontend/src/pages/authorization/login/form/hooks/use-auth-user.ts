@@ -9,13 +9,13 @@ import { setUserLogin } from 'store/user/slice';
 
 import { useSnackbar } from 'hooks/use-snackbar';
 
+import { AuthFormInputs } from 'pages/authorization/types';
+
 import { routesPaths } from 'routes/routes';
 
-import { HttpCodes } from 'utils/http-codes';
 import { getUserDataFromToken, setCookieToken } from 'utils/token';
 
-import { authorizationFormTexts, loginVariants } from '../login/constants';
-import { AuthFormInputs } from '../types';
+import { authorizationFormTexts, loginVariants } from '../../constants';
 
 type Hook = () => {
   isLoginPage: boolean;
@@ -72,13 +72,6 @@ export const useAuthUser: Hook = () => {
       .catch((e: DefaultServerError) => {
         const message = e.data?.error;
         enqueueSnackbar(message, { variant: 'error' });
-
-        if (e.status === HttpCodes.CONFLICT) {
-          setError('login', {
-            type: 'custom',
-            message: message,
-          });
-        }
       });
   };
 

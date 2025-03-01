@@ -6,14 +6,21 @@ export const ProfileLoginField = () => {
     <InputField
       titleSize='h6'
       name='login'
-      rules={{ required: true }}
-      render={({ field }) => (
+      rules={{
+        required: true,
+        minLength: {
+          value: 4,
+          message: 'Минимальная длина логина должна быть не менее 4 символов',
+        },
+      }}
+      render={({ field, fieldState }) => (
         <Input
           label='Логин'
           value={field.value}
           onChange={field.onChange}
           variant='outlined'
-          size='medium'
+          error={!!fieldState.error}
+          helperText={fieldState.error?.message}
         />
       )}
     />
