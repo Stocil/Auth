@@ -3,7 +3,6 @@ import { FC, useEffect } from 'react';
 import { SxProps } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 
-import { useAuthUser } from 'pages/authorization/hooks';
 import { AuthFormInputs } from 'pages/authorization/types';
 
 import { Button } from 'components/button';
@@ -11,6 +10,7 @@ import { Button } from 'components/button';
 import { authorizationFormDefaultValues } from '../constants';
 import { LoginForm } from '../login-styled';
 import { AuthorizationEmailField } from './email-field';
+import { useAuthUser } from './hooks';
 import { AuthorizationLoginField } from './login-field';
 import { AuthorizationPasswordField } from './password-field';
 import { AuthorizationRepeatPasswordField } from './repeat-password-field';
@@ -38,11 +38,12 @@ export const AuthorizationForm: FC = () => {
       {!isLoginPage && <AuthorizationRepeatPasswordField />}
 
       <Button
+        fullWidth
         type='submit'
+        sx={buttonSx}
         text={buttonText}
         disabled={isLoading}
-        sx={buttonSx}
-        fullWidth
+        isLoading={isLoading}
       />
     </LoginForm>
   );

@@ -21,8 +21,8 @@ export const Profile: FC = () => {
   const { avatar, login, email } = userData;
 
   const defaultValues: ProfileFormFields = {
-    login: String(login),
-    email: String(email),
+    login: login,
+    email: email,
     avatar: avatar,
   };
 
@@ -36,7 +36,7 @@ export const Profile: FC = () => {
     if (login && email) {
       setValue('login', login);
       setValue('email', email);
-      setValue('avatar', avatar);
+      setValue('avatar', avatar ?? '');
     }
   }, [avatar, login, email]);
 
@@ -49,7 +49,7 @@ export const Profile: FC = () => {
       <ProfileContainer>
         <UserInfoAvatar sx={avatarSx} src={avatar ?? ''}>
           <Typography variant='h1'>
-            {!avatar && login?.[0].toUpperCase()}
+            {!avatar && login?.[0]?.toUpperCase()}
           </Typography>
         </UserInfoAvatar>
 

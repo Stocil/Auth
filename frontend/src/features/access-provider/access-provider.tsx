@@ -17,7 +17,7 @@ export const AccessProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (isSuccess && token) {
       const userData = getUserDataFromToken(token);
-      dispatch(setUserLogin({ ...userData, token: token }));
+      dispatch(setUserLogin({ token: token, ...userData }));
     }
   }, [isSuccess]);
 

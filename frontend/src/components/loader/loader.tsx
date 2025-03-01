@@ -4,11 +4,12 @@ import { CircularProgress } from '@mui/material';
 
 type Props = PropsWithChildren<{
   isLoading: boolean;
+  size?: number;
 }>;
 
-export const Loader: FC<Props> = ({ isLoading, children }) => {
+export const Loader: FC<Props> = ({ isLoading, size = 80, children }) => {
   if (isLoading) {
-    return <CircularProgress size={80} color='primary' />;
+    return <CircularProgress size={size} color='primary' />;
   }
 
   return children;

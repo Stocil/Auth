@@ -11,14 +11,16 @@ import {
 } from '../profile-styles';
 import { ProfileAvatarField } from './avatar-field';
 import { ProfileEmailField } from './email-field';
+import { useEditUser } from './hooks';
 import { ProfileLoginField } from './login-field';
 import { ProfileFormFields } from './type';
 
 export const ProfileForm: FC = () => {
   const { handleSubmit } = useFormContext<ProfileFormFields>();
+  const { onEditUser, isLoading } = useEditUser();
 
   return (
-    <ProfileUserForm onSubmit={handleSubmit(() => {})}>
+    <ProfileUserForm onSubmit={handleSubmit(onEditUser)}>
       <ProfileUserFields>
         <ProfileUserFieldWrapper>
           <ProfileLoginField />
@@ -33,7 +35,13 @@ export const ProfileForm: FC = () => {
         </ProfileUserFieldWrapper>
       </ProfileUserFields>
 
-      <Button fullWidth color='success' type='submit'>
+      <Button
+        fullWidth
+        color='success'
+        type='submit'
+        disabled={isLoading}
+        isLoading={isLoading}
+      >
         Сохранить
       </Button>
     </ProfileUserForm>

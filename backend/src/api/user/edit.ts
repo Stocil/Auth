@@ -23,9 +23,9 @@ export const editUserData = (req: Request, res: Response) => {
   }
 
   const userId = Number(req.params.id);
-  const isUserExist = !!getUserById(userId);
+  const currentUser = getUserById(userId);
 
-  if (!isUserExist) {
+  if (!currentUser) {
     res
       .status(HTTP_NOT_FOUND)
       .json({ error: 'Пользователя c таким id не существует' });
@@ -36,7 +36,7 @@ export const editUserData = (req: Request, res: Response) => {
   const currentUserNewData: User.Methods.EditUser.Request = req.body;
   const isLoginExist = !!getUserByLogin(currentUserNewData.login);
 
-  if (isLoginExist) {
+  if (currentUser.login !== currentUserNewData.login && isLoginExist) {
     res
       .status(HTTP_CONFLICT)
       .json({ error: 'Пользователь с данным логином уже существует' });

@@ -19,7 +19,7 @@ export const Layout: FC = () => {
   const navigate = useNavigate();
   const { isLogin, logout } = useLogout();
 
-  const userInfo = useSelector(getUserInfo);
+  const { login, avatar } = useSelector(getUserInfo);
 
   const navigateToAuthorizationPage = () => {
     navigate(routesPaths.signIn);
@@ -33,11 +33,7 @@ export const Layout: FC = () => {
         )}
 
         {isLogin && (
-          <AppBarUserActions
-            onLogout={logout}
-            login={String(userInfo?.login)}
-            avatar={userInfo?.avatar}
-          />
+          <AppBarUserActions onLogout={logout} login={login} avatar={avatar} />
         )}
       </AppBar>
 

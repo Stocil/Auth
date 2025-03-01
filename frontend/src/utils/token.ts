@@ -12,7 +12,7 @@ export const getTokenFromCookie = () =>
 
 export const getUserDataFromToken = (token: string) => {
   const { email, login, avatar, id } = jwtDecode<UserInfo>(token);
-  return { email, login, avatar, id };
+  return { id, login, email, avatar };
 };
 
 export const setCookieToken = (token: string) => {
