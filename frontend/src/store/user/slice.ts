@@ -38,10 +38,22 @@ export const userSlice = createSlice({
     setUserToken: (state, action: PayloadAction<InitialState['token']>) => {
       state.token = action.payload;
     },
+
+    setUserAvatar: (
+      state,
+      action: PayloadAction<InitialState['info']['avatar']>,
+    ) => {
+      state.info.avatar = action.payload;
+    },
   },
 });
 
-export const { setUserLogin, setUserLogout, setUserInfo, setUserToken } =
-  userSlice.actions;
+export const {
+  setUserLogin,
+  setUserLogout,
+  setUserInfo,
+  setUserToken,
+  setUserAvatar,
+} = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
