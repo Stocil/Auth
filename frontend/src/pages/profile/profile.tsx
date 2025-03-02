@@ -2,8 +2,10 @@ import { FC, useEffect } from 'react';
 
 import { SxProps, Typography } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getProfilePreviewAvatar } from 'store/profile/selectors';
+import { setProfilePreviewAvatar } from 'store/profile/slice';
 import { getUserInfo } from 'store/user/selectors';
 
 import { UserInfoAvatar } from 'components/app-bar/app-bar-styles';
@@ -17,6 +19,9 @@ import { ProfileContainer } from './profile-styles';
 const avatarSx: SxProps = { width: 350, height: 350 };
 
 export const Profile: FC = () => {
+  const dispatch = useDispatch();
+
+  const previewAvatar = useSelector(getProfilePreviewAvatar);
   const userData = useSelector(getUserInfo);
   const { avatar, login, email } = userData;
 
@@ -40,6 +45,16 @@ export const Profile: FC = () => {
     }
   }, [avatar, login, email]);
 
+  // Сбраываем превью аватарки, если пользователь не сохранил изменения и вышел из профиля
+  useEffect(
+    () => () => {
+      if (previewAvatar && avatar !== previewAvatar) {
+        dispatch(setProfilePreviewAvatar());
+      }
+    },
+    [avatar, previewAvatar],
+  );
+
   return (
     <PageWrapper
       isLoading={false}
@@ -47,7 +62,7 @@ export const Profile: FC = () => {
       noDataFallback={<PageEmptyPage />}
     >
       <ProfileContainer>
-        <UserInfoAvatar sx={avatarSx} src={avatar ?? ''}>
+        <UserInfoAvatar sx={avatarSx} src={previewAvatar ?? avatar ?? ''}>
           <Typography variant='h1'>
             {!avatar && login?.[0]?.toUpperCase()}
           </Typography>
