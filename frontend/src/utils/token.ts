@@ -16,9 +16,9 @@ export const getUserDataFromToken = (token: string) => {
 };
 
 export const setCookieToken = (token: string) => {
-  document.cookie = `${COOKIE_TOKEN_NAME}=${token}`;
+  document.cookie = `${COOKIE_TOKEN_NAME}=${token}; path=/`;
 };
 
 export const deleteCookieToken = () => {
-  document.cookie = `${COOKIE_TOKEN_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+  document.cookie = `${COOKIE_TOKEN_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
 };

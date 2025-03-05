@@ -16,6 +16,7 @@ export const refresh = (req: Request, res: Response) => {
 
   if (!token) {
     res
+      .clearCookie('cookieToken')
       .status(HTTP_UNAUTHORIZE)
       .json({ error: 'Не удалось обновить токен, войдите в аккаунт заново' });
 
@@ -28,7 +29,6 @@ export const refresh = (req: Request, res: Response) => {
     if (err) {
       res
         .clearCookie('cookieToken')
-        .clearCookie('token')
         .status(HTTP_UNAUTHORIZE)
         .json({
           err: {
@@ -44,6 +44,7 @@ export const refresh = (req: Request, res: Response) => {
 
     if (!currentUser) {
       res
+        .clearCookie('cookieToken')
         .status(HTTP_NOT_FOUND)
         .json({ error: 'Не удалось обновить токен, войдите в аккаунт заново' });
 
@@ -53,6 +54,6 @@ export const refresh = (req: Request, res: Response) => {
     const { password, ...currentUserJWTData } = currentUser;
     const { accessToken } = generateTokens(currentUserJWTData);
 
-    res.cookie('token', accessToken).json(accessToken);
+    res.json(accessToken);
   });
 };

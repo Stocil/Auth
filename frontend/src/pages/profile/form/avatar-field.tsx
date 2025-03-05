@@ -12,7 +12,9 @@ export const ProfileAvatarField = () => {
   const dispatch = useDispatch();
 
   const onClick = (newUrl: string) => {
-    dispatch(setProfilePreviewAvatar(newUrl));
+    if (newUrl) {
+      dispatch(setProfilePreviewAvatar(newUrl));
+    }
   };
 
   return (

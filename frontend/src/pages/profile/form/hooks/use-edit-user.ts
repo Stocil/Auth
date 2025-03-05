@@ -26,7 +26,7 @@ export const useEditUser = () => {
   const onEditUser = () => {
     const userNewData = getValues();
 
-    if (typeof id !== 'number') return;
+    if (!id) return;
 
     const userNewDataWithId = {
       id,
