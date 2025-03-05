@@ -7,7 +7,11 @@ import {
 } from '@reduxjs/toolkit/query';
 
 import { HttpCodes } from 'utils/http-codes';
-import { getTokenFromCookie } from 'utils/token';
+import {
+  deleteCookieToken,
+  getTokenFromCookie,
+  setCookieToken,
+} from 'utils/token';
 
 import { baseUrl } from '../api/constants';
 
@@ -51,8 +55,15 @@ const baseQueryWithReauth: BaseQueryFn<
   let result = await baseQuery(preparedArgs, api, extraOptions);
 
   if (result.error && result.error.status === HttpCodes.UNAUTHORIZED) {
-    await refreshToken();
-    result = await baseQuery(preparedArgs, api, extraOptions);
+    const token = await refreshToken();
+    const response = await token.json();
+
+    if (typeof response === 'string') {
+      setCookieToken(response);
+      result = await baseQuery(preparedArgs, api, extraOptions);
+    } else {
+      deleteCookieToken();
+    }
   }
 
   return result;

@@ -1,6 +1,5 @@
 import { FC, useEffect } from 'react';
 
-import { SxProps, Typography } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +7,7 @@ import { getProfilePreviewAvatar } from 'store/profile/selectors';
 import { setProfilePreviewAvatar } from 'store/profile/slice';
 import { getUserInfo } from 'store/user/selectors';
 
-import { UserInfoAvatar } from 'components/app-bar/app-bar-styles';
+import { Avatar } from 'components/avatar/avatar';
 import { PageWrapper } from 'components/page-wrapper';
 
 import { PageEmptyPage } from './empty-page';
@@ -16,14 +15,12 @@ import { ProfileForm } from './form';
 import { ProfileFormFields } from './form/type';
 import { ProfileContainer } from './profile-styles';
 
-const avatarSx: SxProps = { width: 350, height: 350 };
-
 export const Profile: FC = () => {
   const dispatch = useDispatch();
 
   const previewAvatar = useSelector(getProfilePreviewAvatar);
   const userData = useSelector(getUserInfo);
-  const { avatar, login, email } = userData;
+  const { avatar, login, email, id } = userData;
 
   const defaultValues: ProfileFormFields = {
     login: login,
@@ -58,15 +55,16 @@ export const Profile: FC = () => {
   return (
     <PageWrapper
       isLoading={false}
-      isEmptySearch={!userData}
+      isEmptySearch={!id}
       noDataFallback={<PageEmptyPage />}
     >
       <ProfileContainer>
-        <UserInfoAvatar sx={avatarSx} src={previewAvatar ?? avatar ?? ''}>
-          <Typography variant='h1'>
-            {!avatar && login?.[0]?.toUpperCase()}
-          </Typography>
-        </UserInfoAvatar>
+        <Avatar
+          src={previewAvatar ?? avatar ?? ''}
+          noUrlText={login?.[0]}
+          size={350}
+          textSize='h1'
+        />
 
         <FormProvider {...methods}>
           <ProfileForm />

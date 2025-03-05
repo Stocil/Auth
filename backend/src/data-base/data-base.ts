@@ -2,9 +2,9 @@ import { User } from 'types/users';
 
 const testUsers: Array<[number, User.Entity]> = [
   [
-    0,
+    1,
     {
-      id: 0,
+      id: 1,
       login: 'test',
       email: 'test@mail.ru',
       password: '123456',
@@ -13,9 +13,9 @@ const testUsers: Array<[number, User.Entity]> = [
     },
   ],
   [
-    1,
+    2,
     {
-      id: 1,
+      id: 2,
       login: 'test1',
       email: 'test1@mail.ru',
       password: '123456',
@@ -23,9 +23,9 @@ const testUsers: Array<[number, User.Entity]> = [
     },
   ],
   [
-    2,
+    3,
     {
-      id: 2,
+      id: 3,
       login: 'test2',
       email: 'tes2@mail.ru',
       password: '123456',

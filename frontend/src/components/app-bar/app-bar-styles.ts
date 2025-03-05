@@ -1,4 +1,4 @@
-import { AppBar, Avatar, Stack, styled } from '@mui/material';
+import { AppBar, Stack, styled } from '@mui/material';
 
 export const StyledAppBar = styled(AppBar)`
   border-bottom: 2px solid ${(props) => props.theme.palette.primary.main};
@@ -16,8 +16,4 @@ export const AppBarUserInfo = styled(Stack)`
   flex-direction: row;
   align-items: center;
   gap: 10px;
-`;
-
-export const UserInfoAvatar = styled(Avatar)`
-  background-color: ${(props) => props.theme.palette.primary.main};
 `;

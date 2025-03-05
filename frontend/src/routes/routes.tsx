@@ -5,6 +5,7 @@ import { PrivateRoute } from 'features/private-route/private-route';
 import { Authorization } from 'pages/authorization';
 import { HomePage } from 'pages/homepage';
 import { Profile } from 'pages/profile';
+import { User } from 'pages/user';
 
 type Route = {
   path: string;
@@ -16,6 +17,7 @@ export enum routesKeys {
   signIn = 'signIn',
   signUp = 'signUp',
   profile = 'profile',
+  user = 'user',
 }
 
 export enum routesPaths {
@@ -23,6 +25,7 @@ export enum routesPaths {
   signIn = '/sign-in',
   signUp = '/sign-up',
   profile = '/profile',
+  user = '/user/:id',
 }
 
 export const routes: Record<routesKeys, Route> = {
@@ -45,6 +48,10 @@ export const routes: Record<routesKeys, Route> = {
         <Profile />
       </PrivateRoute>
     ),
+  },
+  user: {
+    path: routesPaths.user,
+    element: <User />,
   },
 };
 

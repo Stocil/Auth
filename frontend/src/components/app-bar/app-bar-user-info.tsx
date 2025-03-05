@@ -8,8 +8,8 @@ import { IconButton, Typography } from '@mui/material';
 import {
   AppBarUserActionsWrapper,
   AppBarUserInfo,
-  UserInfoAvatar,
 } from 'components/app-bar/app-bar-styles';
+import { Avatar } from 'components/avatar';
 import { Link } from 'components/link';
 
 import { routesPaths } from 'routes/routes';
@@ -28,9 +28,7 @@ export const AppBarUserActions: FC<Props> = ({ login, avatar, onLogout }) => (
       </Typography>
 
       <Link linkTo={routesPaths.profile}>
-        <UserInfoAvatar src={avatar ?? ''}>
-          {!avatar && login?.[0].toUpperCase()}
-        </UserInfoAvatar>
+        <Avatar src={avatar ?? ''} noUrlText={login?.[0]} size={40} />
       </Link>
     </AppBarUserInfo>
 

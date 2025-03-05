@@ -3,7 +3,7 @@ import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Loader } from 'components/loader';
 
 type Props = PropsWithChildren<{
-  isLoading: boolean;
+  isLoading?: boolean;
   isError?: boolean;
   isEmptySearch?: boolean;
   errorFallback?: ReactNode;
@@ -12,7 +12,7 @@ type Props = PropsWithChildren<{
 
 export const PageWrapper: FC<Props> = ({
   children,
-  isLoading,
+  isLoading = false,
   isError,
   isEmptySearch,
   noDataFallback,
