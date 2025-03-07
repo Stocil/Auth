@@ -15,11 +15,8 @@ import { getTokenFromCookie } from 'utils/token';
 type Props = PropsWithChildren;
 
 export const PrivateRoute: FC<Props> = ({ children }) => {
-  const {
-    isSuccess,
-    isError,
-    isLoading: isAccessLoading,
-  } = authApi.endpoints.checkUserAccess.useQueryState();
+  const { isSuccess, isError } =
+    authApi.endpoints.checkUserAccess.useQueryState();
 
   const isLoading = !isSuccess && !isError;
 
@@ -46,5 +43,5 @@ export const PrivateRoute: FC<Props> = ({ children }) => {
     }
   }, [isPageAvailable]);
 
-  return <Loader isLoading={isAccessLoading}>{children}</Loader>;
+  return <Loader isLoading={!isPageAvailable}>{children}</Loader>;
 };
