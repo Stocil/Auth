@@ -24,5 +24,10 @@ export namespace User {
       export type Request = TokenData;
       export type Response = TokenData;
     }
+
+    export namespace GetUser {
+      export type Request = void;
+      export type Response = TokenData;
+    }
   }
 }

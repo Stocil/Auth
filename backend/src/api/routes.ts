@@ -6,6 +6,7 @@ import { access } from './token/access';
 import { deleteToken } from './token/delete';
 import { refresh } from './token/refresh';
 import { editUserData } from './user/edit';
+import { getUser } from './user/get';
 import { signIn } from './user/sign-in';
 import { signUp } from './user/sign-up';
 
@@ -16,6 +17,7 @@ apiRouter.route('/sign-up').put(signUp);
 apiRouter.route('/sign-in').post(signIn);
 apiRouter
   .route('/user/:id')
+  .get(getUser)
   .patch(authenticateToken, allowedCheck, editUserData);
 
 // Роуты для токенов
