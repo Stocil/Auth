@@ -16,13 +16,13 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
       <GoogleOAuthProvider clientId={clientId}>
-        <AccessProvider>
-          <ThemeModeProvider>
+        <ThemeModeProvider>
+          <AccessProvider>
             <SnackbarProvider>
               <Router />
             </SnackbarProvider>
-          </ThemeModeProvider>
-        </AccessProvider>
+          </AccessProvider>
+        </ThemeModeProvider>
       </GoogleOAuthProvider>
     </Provider>
   </StrictMode>,
