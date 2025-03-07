@@ -14,5 +14,5 @@ export const getUser = (req: Request, res: Response) => {
 
   const { password, ...userData } = user;
 
-  return userData;
+  res.json(userData);
 };
