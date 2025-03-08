@@ -1,7 +1,10 @@
+import CloseIcon from '@mui/icons-material/Close';
 import PanoramaIcon from '@mui/icons-material/Panorama';
 import { IconButton } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getProfilePreviewAvatar } from 'store/profile/selectors';
 import { setProfilePreviewAvatar } from 'store/profile/slice';
 
 import { Input } from 'components/input';
@@ -10,11 +13,16 @@ import { Tooltip } from 'components/tooltip';
 
 export const ProfileAvatarField = () => {
   const dispatch = useDispatch();
+  const previewAvatar = useSelector(getProfilePreviewAvatar);
 
   const onClick = (newUrl: string) => {
-    if (newUrl) {
+    if (newUrl && previewAvatar !== newUrl) {
       dispatch(setProfilePreviewAvatar(newUrl));
     }
+  };
+
+  const onClear = (field: ControllerRenderProps<FieldValues, string>) => {
+    field.onChange('');
   };
 
   return (
@@ -30,11 +38,17 @@ export const ProfileAvatarField = () => {
           slotProps={{
             input: {
               endAdornment: (
-                <Tooltip title='Предпросмотр'>
-                  <IconButton onClick={() => onClick(field.value)}>
-                    <PanoramaIcon color='primary' />
+                <>
+                  <IconButton size='small' onClick={() => onClear(field)}>
+                    <CloseIcon fontSize='small' />
                   </IconButton>
-                </Tooltip>
+
+                  <Tooltip title='Предпросмотр'>
+                    <IconButton onClick={() => onClick(field.value)}>
+                      <PanoramaIcon color='primary' />
+                    </IconButton>
+                  </Tooltip>
+                </>
               ),
             },
           }}

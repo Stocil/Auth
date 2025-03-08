@@ -42,14 +42,12 @@ export const Profile: FC = () => {
     }
   }, [avatar, login, email]);
 
-  // Сбраываем превью аватарки, если пользователь не сохранил изменения и вышел из профиля
+  // Сбраываем превью аватарки при выходе из профиля
   useEffect(
     () => () => {
-      if (previewAvatar && avatar !== previewAvatar) {
-        dispatch(setProfilePreviewAvatar());
-      }
+      dispatch(setProfilePreviewAvatar());
     },
-    [avatar, previewAvatar],
+    [],
   );
 
   return (
