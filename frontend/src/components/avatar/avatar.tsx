@@ -6,7 +6,7 @@ import { Variant } from '@mui/material/styles/createTypography';
 import { ColoredAvatar } from './avatar-styles';
 
 type Props = AvatarProps & {
-  noUrlText: string;
+  noUrlText: string | undefined;
   size: number;
   textSize?: Variant;
 };
@@ -19,7 +19,7 @@ export const Avatar: FC<Props> = ({
 }) => {
   return (
     <ColoredAvatar sx={{ width: size, height: size }} {...props}>
-      <Typography variant={textSize}>{noUrlText.toUpperCase()}</Typography>
+      <Typography variant={textSize}>{noUrlText?.toUpperCase()}</Typography>
     </ColoredAvatar>
   );
 };
