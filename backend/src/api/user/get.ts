@@ -1,6 +1,8 @@
 import { getUserById } from 'data-base/helpers/get-user-by-id';
 import { Request, Response } from 'express';
 
+import { prepareDataForToken } from 'utils/prepare-data-for-token';
+
 export const getUser = (req: Request, res: Response) => {
   const papamsId = Number(req.params.id);
 
@@ -12,7 +14,7 @@ export const getUser = (req: Request, res: Response) => {
     return;
   }
 
-  const { password, ...userData } = user;
+  const userData = prepareDataForToken(user);
 
   res.json(userData);
 };

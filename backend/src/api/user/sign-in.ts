@@ -4,6 +4,7 @@ import { getUserByLogin } from 'data-base/helpers/get-user-by-login';
 import { Request, Response } from 'express';
 
 import { generateTokens } from 'utils/generate-tokens';
+import { prepareDataForToken } from 'utils/prepare-data-for-token';
 
 import { HTTP_INVALID_DATA, HTTP_NO_BODY_PROVIDED } from 'constants/http-codes';
 
@@ -24,7 +25,7 @@ export const signIn = (req: Request, res: Response) => {
     return;
   }
 
-  const { password, ...currentUserJWTData } = currentUser;
+  const currentUserJWTData = prepareDataForToken(currentUser);
   const { accessToken, refreshToken } = generateTokens(currentUserJWTData);
 
   console.log(`Login user\n`);

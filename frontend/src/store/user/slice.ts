@@ -7,6 +7,7 @@ const initialState: InitialState = {
     id: null,
     avatar: '',
     email: '',
+    gmail: null,
     login: '',
   },
   token: null,
@@ -31,8 +32,8 @@ export const userSlice = createSlice({
       state.isLoggin = false;
     },
 
-    setUserInfo: (state, action: PayloadAction<UserInfo>) => {
-      state.info = action.payload;
+    setUserInfo: (state, action: PayloadAction<Omit<UserInfo, 'gmail'>>) => {
+      state.info = { ...state.info, ...action.payload };
     },
 
     setUserToken: (state, action: PayloadAction<InitialState['token']>) => {

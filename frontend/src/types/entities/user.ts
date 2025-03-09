@@ -5,12 +5,13 @@ export namespace User {
     id: number;
     login: string;
     email: string;
+    gmail: Nullable<string>;
     avatar: Nullable<string>;
   };
 
   export namespace Methods {
     export namespace EditUser {
-      export type Request = Entity;
+      export type Request = Omit<Entity, 'gmail'>;
       export type Response = string;
     }
   }

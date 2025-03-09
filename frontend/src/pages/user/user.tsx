@@ -11,7 +11,7 @@ import { UserContainer, UserCornerId } from './user-styles';
 
 export const User: FC = () => {
   const { userData, isError, isLoading } = useFetchUserData();
-  const { id, login, email, avatar } = userData;
+  const { id, login, email, avatar } = userData; // TODO Показывать подвязанный gmail пользователя
 
   return (
     <PageWrapper
