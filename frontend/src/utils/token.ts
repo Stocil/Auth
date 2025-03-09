@@ -10,9 +10,9 @@ export const getTokenFromCookie = () =>
     .find((cookie) => cookie.startsWith('token'))
     ?.split('=')[1];
 
-export const getUserDataFromToken = (token: string) => {
-  const { email, login, avatar, id } = jwtDecode<UserInfo>(token);
-  return { id, login, email, avatar };
+export const getUserDataFromToken = (token: string): UserInfo => {
+  const { id, login, email, gmail, avatar } = jwtDecode<UserInfo>(token);
+  return { id, login, email, gmail, avatar };
 };
 
 export const setCookieToken = (token: string) => {

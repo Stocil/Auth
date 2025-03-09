@@ -5,6 +5,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
 import { generateTokens } from 'utils/generate-tokens';
+import { prepareDataForToken } from 'utils/prepare-data-for-token';
 
 import { HTTP_NOT_FOUND, HTTP_UNAUTHORIZE } from 'constants/http-codes';
 import { SECRET } from 'constants/index';
@@ -51,7 +52,7 @@ export const refresh = (req: Request, res: Response) => {
       return;
     }
 
-    const { password, ...currentUserJWTData } = currentUser;
+    const currentUserJWTData = prepareDataForToken(currentUser);
     const { accessToken } = generateTokens(currentUserJWTData);
 
     res.json(accessToken);

@@ -2,6 +2,8 @@ import { User } from 'types/users';
 
 import { usersBd } from 'data-base/data-base';
 
+import { prepareDataForToken } from 'utils/prepare-data-for-token';
+
 type Props = User.Methods.EditUser.Request;
 
 type UpdateUser = (props: Props) => User.TokenData;
@@ -14,10 +16,9 @@ export const updateUser: UpdateUser = (currentUserNewData) => {
     ...currentUserData,
     ...currentUserNewData,
   };
-  const { password, ...userNewJWTData } = userNewData;
 
   usersBd.set(currentUserNewData.id, userNewData);
   console.log('Update user data');
 
-  return userNewJWTData;
+  return prepareDataForToken(userNewData);
 };

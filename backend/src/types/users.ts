@@ -3,6 +3,7 @@ export namespace User {
     id: number;
     login: string;
     email: string;
+    gmail: string | null;
     password: string;
     avatar: string | null;
   };
@@ -11,17 +12,17 @@ export namespace User {
 
   export namespace Methods {
     export namespace RegisterUser {
-      export type Request = Omit<Entity, 'avatar' | 'id'>;
+      export type Request = Pick<Entity, 'login' | 'email' | 'password'>;
       export type Response = TokenData;
     }
 
     export namespace LoginUser {
-      export type Request = Omit<Entity, 'id' | 'email' | 'avatar'>;
+      export type Request = Pick<Entity, 'login' | 'password'>;
       export type Response = TokenData;
     }
 
     export namespace EditUser {
-      export type Request = TokenData;
+      export type Request = Omit<TokenData, 'gmail'>; // TODO: Присылать потом с беком
       export type Response = TokenData;
     }
 

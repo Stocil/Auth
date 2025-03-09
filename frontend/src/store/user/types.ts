@@ -4,6 +4,7 @@ export type UserInfo = {
   id: Nullable<number>;
   login: string;
   email: string;
+  gmail: Nullable<string>;
   avatar: Nullable<string>;
 };
 

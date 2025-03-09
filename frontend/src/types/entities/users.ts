@@ -5,6 +5,7 @@ export namespace Users {
     id: number;
     login: string;
     email: string;
+    gmail: Nullable<string>;
     avatar: Nullable<string>;
   };
 
