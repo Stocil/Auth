@@ -15,5 +15,10 @@ export namespace Auth {
       export type Request = Omit<Entity, 'email'>;
       export type Response = string;
     }
+
+    export namespace CheckUserGoogleLink {
+      export type Request = { gmail: string };
+      export type Response = string;
+    }
   }
 }

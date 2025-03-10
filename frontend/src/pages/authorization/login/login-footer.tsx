@@ -6,6 +6,7 @@ import { Divider } from 'components/divider';
 import { GoogleLoginButton } from 'components/google-login-button';
 import { Link } from 'components/link';
 
+import { useGoogleAuthUser } from './hooks';
 import { LoginFooterButtons, LoginFormFooter } from './login-styled';
 
 type Props = {
@@ -14,6 +15,8 @@ type Props = {
 };
 
 export const LoginFooter: FC<Props> = ({ link, tipText }) => {
+  const { onSuccess, onError } = useGoogleAuthUser();
+
   return (
     <LoginFormFooter>
       <LoginFooterButtons>
@@ -21,7 +24,7 @@ export const LoginFooter: FC<Props> = ({ link, tipText }) => {
           Или же вы можете войти с помощью
         </Typography>
 
-        <GoogleLoginButton />
+        <GoogleLoginButton onSuccess={onSuccess} onError={onError} />
       </LoginFooterButtons>
 
       <Divider />
