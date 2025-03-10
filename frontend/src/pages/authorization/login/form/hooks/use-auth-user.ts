@@ -46,8 +46,8 @@ export const useAuthUser: Hook = () => {
 
     const userData = getUserDataFromToken(token);
 
-    dispatch(setUserLogin({ ...userData, token: token }));
     setCookieToken(token);
+    dispatch(setUserLogin({ ...userData, token }));
     enqueueSnackbar(successMessage);
     navigate({ pathname: prevPath });
   };

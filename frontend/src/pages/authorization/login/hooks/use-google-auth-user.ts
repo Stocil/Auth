@@ -1,14 +1,16 @@
 import { CredentialResponse } from '@react-oauth/google';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
+import { useDispatch } from 'react-redux';
 import { Location, useLocation, useNavigate } from 'react-router';
 
 import { useCheckUserGoogleLinkMutation } from 'store/api/auth';
+import { setUserLogin } from 'store/user/slice';
 
 import { useSnackbar } from 'hooks/use-snackbar';
 
 import { routesPaths } from 'routes/routes';
 
-import { setCookieToken } from 'utils/token';
+import { getUserDataFromToken, setCookieToken } from 'utils/token';
 
 import { LocationStateType } from '../../types';
 
@@ -24,6 +26,7 @@ type Hook = () => {
 };
 
 export const useGoogleAuthUser: Hook = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -43,7 +46,11 @@ export const useGoogleAuthUser: Hook = () => {
     checkUserLink({ gmail: userJWTData.email })
       .unwrap()
       .then((token) => {
+        const userData = getUserDataFromToken(token);
+
         setCookieToken(token);
+        dispatch(setUserLogin({ ...userData, token }));
+        enqueueSnackbar('Вы успешно авторизовались через Google');
         navigate({ pathname: prevPath });
       });
   };
