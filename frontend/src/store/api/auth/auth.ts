@@ -33,6 +33,17 @@ export const authApi = baseApi.enhanceEndpoints({}).injectEndpoints({
     checkUserAccess: builder.query<void, void>({
       query: () => 'access',
     }),
+
+    checkUserGoogleLink: builder.mutation<
+      Auth.Methods.CheckUserGoogleLink.Response,
+      Auth.Methods.CheckUserGoogleLink.Request
+    >({
+      query: (body) => ({
+        url: 'google/check-link',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -41,4 +52,5 @@ export const {
   useLoginUserMutation,
   useLogoutUserMutation,
   useCheckUserAccessQuery,
+  useCheckUserGoogleLinkMutation,
 } = authApi;

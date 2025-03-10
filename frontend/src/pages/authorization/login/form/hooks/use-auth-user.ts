@@ -9,7 +9,7 @@ import { setUserLogin } from 'store/user/slice';
 
 import { useSnackbar } from 'hooks/use-snackbar';
 
-import { AuthFormInputs } from 'pages/authorization/types';
+import { AuthFormInputs, LocationStateType } from 'pages/authorization/types';
 
 import { routesPaths } from 'routes/routes';
 
@@ -21,10 +21,6 @@ type Hook = () => {
   isLoginPage: boolean;
   onSubmit: SubmitHandler<AuthFormInputs>;
   isLoading: boolean;
-};
-
-type LocationStateType = {
-  prevPath: string | undefined;
 };
 
 export const useAuthUser: Hook = () => {

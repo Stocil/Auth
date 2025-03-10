@@ -2,17 +2,12 @@ import { FC } from 'react';
 
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
-import { setCookieToken } from 'utils/token';
+type Props = {
+  onSuccess: (props: CredentialResponse) => void;
+  onError: VoidFunction;
+};
 
-export const GoogleLoginButton: FC = () => {
-  const onSuccess = ({ credential }: CredentialResponse) => {
-    setCookieToken(String(credential));
-  };
-
-  const onError = () => {
-    console.log('fail');
-  };
-
+export const GoogleLoginButton: FC<Props> = ({ onSuccess, onError }) => {
   return (
     <GoogleLogin
       onSuccess={onSuccess}

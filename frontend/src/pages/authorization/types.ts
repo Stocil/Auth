@@ -4,3 +4,7 @@ export type AuthFormInputs = {
   password: string;
   repeatPassword?: string;
 };
+
+export type LocationStateType = {
+  prevPath: string | undefined;
+};
