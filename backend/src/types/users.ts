@@ -30,5 +30,10 @@ export namespace User {
       export type Request = void;
       export type Response = TokenData;
     }
+
+    export namespace CheckUserGoogleLink {
+      export type Request = Pick<Entity, 'gmail'>;
+      export type Response = string;
+    }
   }
 }
