@@ -7,7 +7,7 @@ const testUsers: Array<[number, User.Entity]> = [
       id: 1,
       login: 'test',
       email: 'test@mail.ru',
-      gmail: 'test@gmail.com',
+      gmail: 'vashurosh03@gmail.com',
       password: '123456',
       avatar:
         'https://i.pinimg.com/736x/28/50/bc/2850bcda883b5c0aa511ea3b02a04391.jpg',
