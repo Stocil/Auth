@@ -8,9 +8,9 @@ import { AuthFormInputs } from 'pages/authorization/types';
 import { Button } from 'components/button';
 
 import { authorizationFormDefaultValues } from '../constants';
+import { useAuthUser } from '../hooks';
 import { LoginForm } from '../login-styled';
 import { AuthorizationEmailField } from './email-field';
-import { useAuthUser } from './hooks';
 import { AuthorizationLoginField } from './login-field';
 import { AuthorizationPasswordField } from './password-field';
 import { AuthorizationRepeatPasswordField } from './repeat-password-field';

@@ -15,7 +15,7 @@ import { routesPaths } from 'routes/routes';
 
 import { getUserDataFromToken, setCookieToken } from 'utils/token';
 
-import { authorizationFormTexts, loginVariants } from '../../constants';
+import { authorizationFormTexts, loginVariants } from '../constants';
 
 type Hook = () => {
   isLoginPage: boolean;

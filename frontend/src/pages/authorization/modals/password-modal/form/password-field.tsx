@@ -1,21 +1,25 @@
+import { FC } from 'react';
+
+import { SxProps } from '@mui/material';
+
 import { InputField } from 'components/input-field';
+import { InputFieldProps } from 'components/input-field/input-field';
 import { PasswordInput } from 'components/input/password-input';
 
-export const AuthorizationRepeatPasswordField = () => {
+type Props = Omit<InputFieldProps, 'render'>;
+
+const titleSx: SxProps = {
+  ml: 0,
+};
+
+export const PasswordModalField: FC<Props> = (props) => {
   return (
     <InputField
-      title='Повторите пароль'
-      name='repeatPassword'
-      rules={{
-        required: true,
-        minLength: {
-          value: 6,
-          message: 'Минимальная длина пароля должна быть 6 символов',
-        },
-      }}
+      {...props}
+      titleSx={titleSx}
       render={({ field, fieldState }) => (
         <PasswordInput
-          placeholder='Повторите пароль'
+          placeholder={props.title}
           value={field.value}
           onChange={field.onChange}
           error={!!fieldState.error}

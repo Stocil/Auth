@@ -44,6 +44,17 @@ export const authApi = baseApi.enhanceEndpoints({}).injectEndpoints({
         body,
       }),
     }),
+
+    registerUserByGoogle: builder.mutation<
+      Auth.Methods.RegisterUserByGoogle.Response,
+      Auth.Methods.RegisterUserByGoogle.Request
+    >({
+      query: (body) => ({
+        url: 'google/sign-up',
+        method: 'PUT',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -53,4 +64,5 @@ export const {
   useLogoutUserMutation,
   useCheckUserAccessQuery,
   useCheckUserGoogleLinkMutation,
+  useRegisterUserByGoogleMutation,
 } = authApi;

@@ -6,6 +6,7 @@ import { routesPaths } from 'routes/routes';
 
 import { Login } from './login';
 import { LogoutInfo } from './logout';
+import { AuthorizationModals } from './modals';
 
 export const Authorization = () => {
   const { pathname } = useLocation();
@@ -17,5 +18,10 @@ export const Authorization = () => {
     return <LogoutInfo onLogout={logout} />;
   }
 
-  return <Login isLoginPage={isLoginPage} />;
+  return (
+    <>
+      <Login isLoginPage={isLoginPage} />
+      <AuthorizationModals />
+    </>
+  );
 };

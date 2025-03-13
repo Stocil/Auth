@@ -13,9 +13,9 @@ export const useSnackbar = () => {
     const variant = options?.variant ?? 'success';
 
     enqueueSnackbarDefault(message, {
+      autoHideDuration: 3000,
       ...options,
       variant,
-      autoHideDuration: 3000,
     });
   };
 

@@ -1,18 +1,14 @@
 import { Input } from 'components/input';
 import { InputField } from 'components/input-field';
 
+import { loginRules } from 'utils/field-rules';
+
 export const AuthorizationLoginField = () => {
   return (
     <InputField
       title='Логин'
       name='login'
-      rules={{
-        required: true,
-        minLength: {
-          value: 4,
-          message: 'Минимальная длина логина должна быть не менее 4 символов',
-        },
-      }}
+      rules={loginRules}
       render={({ field, fieldState }) => (
         <Input
           value={field.value}

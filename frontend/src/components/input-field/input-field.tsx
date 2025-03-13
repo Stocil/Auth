@@ -1,25 +1,32 @@
 import { FC } from 'react';
 
-import { Typography } from '@mui/material';
+import { SxProps, Typography } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { Controller, ControllerProps } from 'react-hook-form';
 
 import { InputFieldWrapper } from './input-field-styles';
 
-type Props = ControllerProps & {
+export type InputFieldProps = ControllerProps & {
   title?: string;
   titleSize?: Variant;
+  titleSx?: SxProps;
 };
 
-export const InputField: FC<Props> = ({
+export const InputField: FC<InputFieldProps> = ({
   title,
   titleSize = 'body1',
+  titleSx,
   ...controllerProps
 }) => {
   return (
     <InputFieldWrapper>
       {title && (
-        <Typography variant={titleSize} color='primary' marginLeft={'14px'}>
+        <Typography
+          variant={titleSize}
+          color='primary'
+          marginLeft={'14px'}
+          sx={titleSx}
+        >
           {title}
         </Typography>
       )}

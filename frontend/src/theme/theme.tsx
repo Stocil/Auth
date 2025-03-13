@@ -96,6 +96,14 @@ export const ThemeModeProvider = ({ children }: ThemeProps) => {
           },
         },
       },
+      MuiModal: {
+        styleOverrides: {
+          backdrop: {
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            backdropFilter: 'blur(5px)',
+          },
+        },
+      },
     },
 
     breakpoints: {

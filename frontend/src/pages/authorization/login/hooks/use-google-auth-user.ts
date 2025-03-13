@@ -1,15 +1,19 @@
+import { DefaultServerError } from 'types';
+
 import { CredentialResponse } from '@react-oauth/google';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { Location, useLocation, useNavigate } from 'react-router';
 
 import { useCheckUserGoogleLinkMutation } from 'store/api/auth';
+import { setAuthorizationModalsState } from 'store/authorization/modals/slice';
 import { setUserLogin } from 'store/user/slice';
 
 import { useSnackbar } from 'hooks/use-snackbar';
 
 import { routesPaths } from 'routes/routes';
 
+import { HttpCodes } from 'utils/http-codes';
 import { getUserDataFromToken, setCookieToken } from 'utils/token';
 
 import { LocationStateType } from '../../types';
@@ -24,6 +28,9 @@ type Hook = () => {
   onSuccess: (props: CredentialResponse) => void;
   onError: VoidFunction;
 };
+
+const userLinkNotFoundError =
+  'Для продолжения регистрации нужно придумать пароль';
 
 export const useGoogleAuthUser: Hook = () => {
   const dispatch = useDispatch();
@@ -52,6 +59,21 @@ export const useGoogleAuthUser: Hook = () => {
         dispatch(setUserLogin({ ...userData, token }));
         enqueueSnackbar('Вы успешно авторизовались через Google');
         navigate({ pathname: prevPath });
+      })
+      .catch((error: DefaultServerError) => {
+        const info = {
+          login: userJWTData.name,
+          gmail: userJWTData.email,
+          avatar: userJWTData.picture,
+        };
+
+        if (error.status === HttpCodes.NOT_FOUND) {
+          dispatch(setAuthorizationModalsState({ isOpen: true, info }));
+          enqueueSnackbar(userLinkNotFoundError, {
+            variant: 'error',
+            autoHideDuration: 5000,
+          });
+        }
       });
   };
 
