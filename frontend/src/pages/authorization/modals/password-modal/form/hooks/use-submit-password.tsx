@@ -11,6 +11,7 @@ import { setUserLogin } from 'store/user/slice';
 
 import { useSnackbar } from 'hooks/use-snackbar';
 
+import { authorizationFormTexts } from 'pages/authorization/login/constants';
 import { LocationStateType } from 'pages/authorization/types';
 
 import { routesPaths } from 'routes/routes';
@@ -44,15 +45,13 @@ export const useSubmitGooglePasswordModalForm = () => {
     const { password, repeatPassword } = getValues();
 
     if (password !== repeatPassword) {
-      const message = 'Пароли должны совпадать';
-
       setError('password', {
         type: 'custom',
-        message: message,
+        message: authorizationFormTexts.validationErrors.passwordDontMatch,
       });
       setError('repeatPassword', {
         type: 'custom',
-        message: message,
+        message: authorizationFormTexts.validationErrors.passwordDontMatch,
       });
 
       return;
