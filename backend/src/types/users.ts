@@ -35,5 +35,9 @@ export namespace User {
       export type Request = Pick<Entity, 'gmail'>;
       export type Response = string;
     }
+
+    export namespace RegisterUserByGoogle {
+      export type Request = Omit<Entity, 'id' | 'email'>;
+    }
   }
 }

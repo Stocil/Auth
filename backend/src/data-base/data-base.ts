@@ -7,7 +7,7 @@ const testUsers: Array<[number, User.Entity]> = [
       id: 1,
       login: 'test',
       email: 'test@mail.ru',
-      gmail: 'vashurosh03@gmail.com',
+      gmail: 'vashurosh033@gmail.com',
       password: '123456',
       avatar:
         'https://i.pinimg.com/736x/28/50/bc/2850bcda883b5c0aa511ea3b02a04391.jpg',
@@ -17,7 +17,7 @@ const testUsers: Array<[number, User.Entity]> = [
     2,
     {
       id: 2,
-      login: 'test1',
+      login: 'HUFHu Down',
       email: 'test1@mail.ru',
       gmail: null,
       password: '123456',
@@ -29,7 +29,7 @@ const testUsers: Array<[number, User.Entity]> = [
     {
       id: 3,
       login: 'test2',
-      email: 'tes2@mail.ru',
+      email: 'test2@mail.ru',
       gmail: null,
       password: '123456',
       avatar: null,
