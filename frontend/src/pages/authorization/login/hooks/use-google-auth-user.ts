@@ -72,7 +72,12 @@ export const useGoogleAuthUser: Hook = () => {
           enqueueSnackbar(userLinkNotFoundError, {
             variant: 'error',
           });
+
+          return;
         }
+
+        const errorMessage = error.data?.error;
+        enqueueSnackbar(errorMessage, { variant: 'error' });
       });
   };
 

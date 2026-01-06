@@ -7,21 +7,9 @@ import { Request, Response } from 'express';
 
 import { generateTokens } from 'utils/generate-tokens';
 
-import {
-  HTTP_CONFLICT,
-  HTTP_NOT_FOUND,
-  HTTP_NO_BODY_PROVIDED,
-} from 'constants/http-codes';
+import { HTTP_CONFLICT, HTTP_NOT_FOUND } from 'constants/http-codes';
 
 export const editUserData = (req: Request, res: Response) => {
-  if (!req.body) {
-    res
-      .status(HTTP_NO_BODY_PROVIDED)
-      .json({ error: 'Необходимо отправить корректные данные' });
-
-    return;
-  }
-
   const userId = Number(req.params.id);
   const currentUser = getUserById(userId);
 

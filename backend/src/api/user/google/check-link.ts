@@ -6,20 +6,11 @@ import { Request, Response } from 'express';
 import { generateTokens } from 'utils/generate-tokens';
 import { prepareDataForToken } from 'utils/prepare-data-for-token';
 
-import { HTTP_NOT_FOUND, HTTP_NO_BODY_PROVIDED } from 'constants/http-codes';
+import { HTTP_NOT_FOUND } from 'constants/http-codes';
 
 export const checkGoogleLink = (req: Request, res: Response) => {
-  const userGmail: User.Methods.CheckUserGoogleLink.Request = req.body;
-
-  if (!userGmail) {
-    res
-      .status(HTTP_NO_BODY_PROVIDED)
-      .json({ error: 'Необходимо отправить данные' });
-
-    return;
-  }
-
-  const { gmail } = userGmail;
+  const body: User.Methods.CheckUserGoogleLink.Request = req.body;
+  const { gmail } = body;
   const currentUser = getUserByGmail(gmail);
 
   if (!currentUser) {

@@ -6,17 +6,9 @@ import { Request, Response } from 'express';
 import { generateTokens } from 'utils/generate-tokens';
 import { prepareDataForToken } from 'utils/prepare-data-for-token';
 
-import { HTTP_INVALID_DATA, HTTP_NO_BODY_PROVIDED } from 'constants/http-codes';
+import { HTTP_INVALID_DATA } from 'constants/http-codes';
 
 export const signIn = (req: Request, res: Response) => {
-  if (!req.body) {
-    res
-      .status(HTTP_NO_BODY_PROVIDED)
-      .json({ error: 'Необходимо отправить данные' });
-
-    return;
-  }
-
   const user: User.Methods.LoginUser.Request = req.body;
   const currentUser = getUserByLogin(user.login);
 

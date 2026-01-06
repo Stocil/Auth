@@ -1,6 +1,7 @@
 import express from 'express';
 import { allowedCheck } from 'middleware/allowed-check';
 import { authenticateToken } from 'middleware/authenticate-token';
+import { requireBodyCheck } from 'middleware/require-body-check';
 
 import { access } from './token/access';
 import { deleteToken } from './token/delete';
@@ -15,12 +16,12 @@ import { signUp } from './user/sign-up';
 export const apiRouter = express.Router();
 
 // Роуты для users
-apiRouter.route('/sign-up').put(signUp);
-apiRouter.route('/sign-in').post(signIn);
+apiRouter.route('/sign-up').put(requireBodyCheck, signUp);
+apiRouter.route('/sign-in').post(requireBodyCheck, signIn);
 apiRouter
   .route('/user/:id')
   .get(getUser)
-  .patch(authenticateToken, allowedCheck, editUserData);
+  .patch(authenticateToken, allowedCheck, requireBodyCheck, editUserData);
 
 // Роуты для токенов
 apiRouter.route('/access').get(authenticateToken, access);
@@ -28,5 +29,5 @@ apiRouter.route('/refresh').get(refresh);
 apiRouter.route('/logout').get(deleteToken);
 
 // Роуты для авторизации через google
-apiRouter.route('/google/check-link').post(checkGoogleLink);
-apiRouter.route('/google/sign-up').put(signUpByGoogle);
+apiRouter.route('/google/check-link').post(requireBodyCheck, checkGoogleLink);
+apiRouter.route('/google/sign-up').put(requireBodyCheck, signUpByGoogle);

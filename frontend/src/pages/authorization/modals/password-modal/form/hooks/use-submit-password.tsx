@@ -1,3 +1,5 @@
+import { DefaultServerError } from 'types';
+
 import { useFormContext } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Location, useLocation, useNavigate } from 'react-router';
@@ -68,6 +70,10 @@ export const useSubmitGooglePasswordModalForm = () => {
         dispatch(setUserLogin({ ...userData, token }));
         enqueueSnackbar('Вы успешно авторизовались через Google');
         navigate({ pathname: prevPath });
+      })
+      .catch((e: DefaultServerError) => {
+        const message = e.data?.error;
+        enqueueSnackbar(message, { variant: 'error' });
       })
       .finally(onCloseModal);
   };

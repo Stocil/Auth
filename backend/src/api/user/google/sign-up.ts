@@ -7,17 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { generateTokens } from 'utils/generate-tokens';
 
-import { HTTP_NO_BODY_PROVIDED } from 'constants/http-codes';
-
 export const signUpByGoogle = (req: Request, res: Response) => {
-  if (!req.body) {
-    res
-      .status(HTTP_NO_BODY_PROVIDED)
-      .json({ error: 'Необходимо отправить данные' });
-
-    return;
-  }
-
   let user: User.Methods.RegisterUserByGoogle.Request = req.body;
   const isUserExist = !!getUserByLogin(user.login);
 
