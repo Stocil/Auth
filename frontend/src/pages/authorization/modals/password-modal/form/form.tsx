@@ -7,13 +7,13 @@ import {
   PasswordModalFormButton,
   PasswordModalFormWrapper,
 } from './form-styles';
-import { useSubmitGooglePasswordModalForm } from './hooks';
+import { useSubmitNewGoogleAccountPasswordForm } from './hooks';
 import { PasswordModalField } from './password-field';
 
 export const PasswordModalForm = () => {
   const { handleSubmit } = useFormContext<PasswordModalFormInputs>();
 
-  const { onSubmit, isLoading } = useSubmitGooglePasswordModalForm();
+  const { onSubmit, isLoading } = useSubmitNewGoogleAccountPasswordForm();
 
   return (
     <PasswordModalFormWrapper onSubmit={handleSubmit(onSubmit)}>

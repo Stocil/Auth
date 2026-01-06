@@ -1,19 +1,16 @@
 import { DefaultServerError } from 'types';
 
 import { SubmitHandler, useFormContext } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { Location, useLocation, useNavigate } from 'react-router';
+import { Location, useLocation } from 'react-router';
 
 import { useLoginUserMutation, useRegisterUserMutation } from 'store/api/auth';
-import { setUserLogin } from 'store/user/slice';
 
+import { useLogin } from 'hooks/use-login';
 import { useSnackbar } from 'hooks/use-snackbar';
 
 import { AuthFormInputs, LocationStateType } from 'pages/authorization/types';
 
 import { routesPaths } from 'routes/routes';
-
-import { getUserDataFromToken, setCookieToken } from 'utils/token';
 
 import { authorizationFormTexts, loginVariants } from '../constants';
 
@@ -24,9 +21,9 @@ type Hook = () => {
 };
 
 export const useAuthUser: Hook = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+
+  const { onLogin } = useLogin();
 
   const { getValues, setError } = useFormContext<AuthFormInputs>();
 
@@ -44,12 +41,7 @@ export const useAuthUser: Hook = () => {
       ? successSnack[loginVariants.signIn]
       : successSnack[loginVariants.signUp];
 
-    const userData = getUserDataFromToken(token);
-
-    setCookieToken(token);
-    dispatch(setUserLogin({ ...userData, token }));
-    enqueueSnackbar(successMessage);
-    navigate({ pathname: prevPath });
+    onLogin({ token, successMessage, navigatePathname: prevPath });
   };
 
   const onLoginUser = () => {

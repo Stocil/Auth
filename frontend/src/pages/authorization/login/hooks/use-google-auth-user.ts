@@ -3,18 +3,17 @@ import { DefaultServerError } from 'types';
 import { CredentialResponse } from '@react-oauth/google';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
-import { Location, useLocation, useNavigate } from 'react-router';
+import { Location, useLocation } from 'react-router';
 
 import { useCheckUserGoogleLinkMutation } from 'store/api/auth';
 import { setAuthorizationModalsState } from 'store/authorization/modals/slice';
-import { setUserLogin } from 'store/user/slice';
 
+import { useLogin } from 'hooks/use-login';
 import { useSnackbar } from 'hooks/use-snackbar';
 
 import { routesPaths } from 'routes/routes';
 
 import { HttpCodes } from 'utils/http-codes';
-import { getUserDataFromToken, setCookieToken } from 'utils/token';
 
 import { LocationStateType } from '../../types';
 
@@ -32,10 +31,13 @@ type Hook = () => {
 const userLinkNotFoundError =
   'Для продолжения регистрации нужно придумать пароль';
 
+const successMessage = 'Вы успешно авторизовались через Google';
+
 export const useGoogleAuthUser: Hook = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+
+  const { onLogin } = useLogin();
 
   const { state }: Location<LocationStateType> = useLocation();
   const prevPath = state?.prevPath ?? routesPaths.main;
@@ -53,12 +55,7 @@ export const useGoogleAuthUser: Hook = () => {
     checkUserLink({ gmail: userJWTData.email })
       .unwrap()
       .then((token) => {
-        const userData = getUserDataFromToken(token);
-
-        setCookieToken(token);
-        dispatch(setUserLogin({ ...userData, token }));
-        enqueueSnackbar('Вы успешно авторизовались через Google');
-        navigate({ pathname: prevPath });
+        onLogin({ token, successMessage, navigatePathname: prevPath });
       })
       .catch((error: DefaultServerError) => {
         const info = {

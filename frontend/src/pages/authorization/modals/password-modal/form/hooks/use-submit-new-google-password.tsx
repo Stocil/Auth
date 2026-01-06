@@ -2,13 +2,13 @@ import { DefaultServerError } from 'types';
 
 import { useFormContext } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Location, useLocation, useNavigate } from 'react-router';
+import { Location, useLocation } from 'react-router';
 
 import { useRegisterUserByGoogleMutation } from 'store/api/auth';
 import { getAuthorizationPasswordModalState } from 'store/authorization/modals/selectors';
 import { setAuthorizationModalsState } from 'store/authorization/modals/slice';
-import { setUserLogin } from 'store/user/slice';
 
+import { useLogin } from 'hooks/use-login';
 import { useSnackbar } from 'hooks/use-snackbar';
 
 import { authorizationFormTexts } from 'pages/authorization/login/constants';
@@ -16,14 +16,15 @@ import { LocationStateType } from 'pages/authorization/types';
 
 import { routesPaths } from 'routes/routes';
 
-import { getUserDataFromToken, setCookieToken } from 'utils/token';
-
 import { PasswordModalFormInputs } from '../../types';
 
-export const useSubmitGooglePasswordModalForm = () => {
+const successMessage = 'Вы успешно зарегистрировались через Google';
+
+export const useSubmitNewGoogleAccountPasswordForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+
+  const { onLogin } = useLogin();
 
   const { info } = useSelector(getAuthorizationPasswordModalState);
 
@@ -64,12 +65,7 @@ export const useSubmitGooglePasswordModalForm = () => {
     registerUserByGoogle(newUserData)
       .unwrap()
       .then((token) => {
-        const userData = getUserDataFromToken(token);
-
-        setCookieToken(token);
-        dispatch(setUserLogin({ ...userData, token }));
-        enqueueSnackbar('Вы успешно авторизовались через Google');
-        navigate({ pathname: prevPath });
+        onLogin({ token, successMessage, navigatePathname: prevPath });
       })
       .catch((e: DefaultServerError) => {
         const message = e.data?.error;

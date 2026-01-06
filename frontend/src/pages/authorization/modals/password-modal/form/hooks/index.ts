@@ -1,1 +1,1 @@
-export { useSubmitGooglePasswordModalForm } from './use-submit-password';
+export { useSubmitNewGoogleAccountPasswordForm } from './use-submit-new-google-password';
