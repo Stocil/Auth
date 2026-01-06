@@ -78,7 +78,6 @@ export const useSubmitGooglePasswordModalForm = () => {
 
           enqueueSnackbar('Данный логин уже занят, придумайте новый', {
             variant: 'error',
-            autoHideDuration: 5000,
           });
         }
       })

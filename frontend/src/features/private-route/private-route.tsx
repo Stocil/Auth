@@ -25,8 +25,7 @@ export const PrivateRoute: FC<Props> = ({ children }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  // Подвязываем на isLogin, чтобы происходил редирект
-  // при выходе из аккаунта в приватном роуте
+  // Подвязываем на isLogin, чтобы происходил редирект при выходе из аккаунта в приватном роуте
   let isPageAvailable = isLogin;
 
   if (token && !isPageAvailable) {

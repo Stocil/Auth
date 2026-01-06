@@ -31,6 +31,6 @@ export const signUpByGoogle = (req: Request, res: Response) => {
   const newUser = addGoogleUserToDB(user);
   const { accessToken, refreshToken } = generateTokens(newUser);
 
-  console.log(`Register user\n`);
+  console.log(`Register user with google\n`);
   res.cookie('cookieToken', refreshToken, { httpOnly: true }).json(accessToken);
 };

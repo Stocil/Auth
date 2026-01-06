@@ -33,6 +33,6 @@ export const checkGoogleLink = (req: Request, res: Response) => {
   const currentUserJWTData = prepareDataForToken(currentUser);
   const { accessToken, refreshToken } = generateTokens(currentUserJWTData);
 
-  console.log(`Login user using google\n`);
+  console.log(`Login user with google\n`);
   res.cookie('cookieToken', refreshToken, { httpOnly: true }).json(accessToken);
 };

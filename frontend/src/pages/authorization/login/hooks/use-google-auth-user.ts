@@ -71,7 +71,6 @@ export const useGoogleAuthUser: Hook = () => {
           dispatch(setAuthorizationModalsState({ isOpen: true, info }));
           enqueueSnackbar(userLinkNotFoundError, {
             variant: 'error',
-            autoHideDuration: 5000,
           });
         }
       });
