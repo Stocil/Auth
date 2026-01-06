@@ -3,10 +3,11 @@ import { User } from 'types/users';
 import { addGoogleUserToDB } from 'data-base/helpers/add-google-user';
 import { getUserByLogin } from 'data-base/helpers/get-user-by-login';
 import { Request, Response } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 
 import { generateTokens } from 'utils/generate-tokens';
 
-import { HTTP_CONFLICT, HTTP_NO_BODY_PROVIDED } from 'constants/http-codes';
+import { HTTP_NO_BODY_PROVIDED } from 'constants/http-codes';
 
 export const signUpByGoogle = (req: Request, res: Response) => {
   if (!req.body) {
@@ -17,15 +18,11 @@ export const signUpByGoogle = (req: Request, res: Response) => {
     return;
   }
 
-  const user: User.Methods.RegisterUserByGoogle.Request = req.body;
+  let user: User.Methods.RegisterUserByGoogle.Request = req.body;
   const isUserExist = !!getUserByLogin(user.login);
 
   if (isUserExist) {
-    res.status(HTTP_CONFLICT).json({
-      error: 'Пользователь с таким логином уже существует, придумайте новый',
-    });
-
-    return;
+    user = { ...user, login: `${user.login}-${uuidv4()}` };
   }
 
   const newUser = addGoogleUserToDB(user);
