@@ -1,5 +1,3 @@
-import { DefaultServerError } from 'types';
-
 import { useFormContext } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Location, useLocation, useNavigate } from 'react-router';
@@ -16,7 +14,6 @@ import { LocationStateType } from 'pages/authorization/types';
 
 import { routesPaths } from 'routes/routes';
 
-import { HttpCodes } from 'utils/http-codes';
 import { getUserDataFromToken, setCookieToken } from 'utils/token';
 
 import { PasswordModalFormInputs } from '../../types';
@@ -71,15 +68,6 @@ export const useSubmitGooglePasswordModalForm = () => {
         dispatch(setUserLogin({ ...userData, token }));
         enqueueSnackbar('Вы успешно авторизовались через Google');
         navigate({ pathname: prevPath });
-      })
-      .catch((error: DefaultServerError) => {
-        if (error.status === HttpCodes.CONFLICT) {
-          // TODO: Обработать ошибку
-
-          enqueueSnackbar('Данный логин уже занят, придумайте новый', {
-            variant: 'error',
-          });
-        }
       })
       .finally(onCloseModal);
   };

@@ -3,6 +3,8 @@ import { InputField } from 'components/input-field';
 
 import { loginRules } from 'utils/field-rules';
 
+import { profileDirtyFieldSx } from './constants';
+
 export const ProfileLoginField = () => {
   return (
     <InputField
@@ -17,6 +19,7 @@ export const ProfileLoginField = () => {
           variant='outlined'
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          sx={fieldState.isDirty ? profileDirtyFieldSx : undefined}
         />
       )}
     />

@@ -2,6 +2,10 @@ import { styled } from '@mui/material';
 
 import { HorizontalStack, VerticalStack } from 'components/stack';
 
+type ProfileUserFieldWrapperProps = {
+  isDirty?: boolean;
+};
+
 export const ProfileContainer = styled(HorizontalStack)`
   gap: 70px;
   justify-content: space-between;
@@ -22,10 +26,16 @@ export const ProfileUserFields = styled(VerticalStack)`
   gap: 30px;
 `;
 
-export const ProfileUserFieldWrapper = styled(VerticalStack)`
+export const ProfileUserFieldWrapper = styled(
+  VerticalStack,
+)<ProfileUserFieldWrapperProps>`
   width: 400px;
 
-  border-bottom: ${(props) => `2px solid ${props.theme.palette.primary.main}`};
+  border-bottom: 2px solid;
+  border-color: ${({ theme, isDirty }) =>
+    `${isDirty ? theme.palette.success.main : theme.palette.primary.main}`};
   border-radius: 8px;
   padding: 10px 0px;
+
+  transition: border-color 0.5s;
 `;

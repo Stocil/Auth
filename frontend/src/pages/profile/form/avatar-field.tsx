@@ -11,6 +11,8 @@ import { Input } from 'components/input';
 import { InputField } from 'components/input-field';
 import { Tooltip } from 'components/tooltip';
 
+import { profileDirtyFieldSx } from './constants';
+
 export const ProfileAvatarField = () => {
   const dispatch = useDispatch();
   const previewAvatar = useSelector(getProfilePreviewAvatar);
@@ -28,13 +30,14 @@ export const ProfileAvatarField = () => {
   return (
     <InputField
       name='avatar'
-      render={({ field }) => (
+      render={({ field, fieldState }) => (
         <Input
           type='url'
           label='URL ссылка на аватар'
           value={field.value}
           onChange={field.onChange}
           variant='outlined'
+          sx={fieldState.isDirty ? profileDirtyFieldSx : undefined}
           slotProps={{
             input: {
               endAdornment: (

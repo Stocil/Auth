@@ -50,7 +50,6 @@ export const useEditUser = () => {
             message: 'Этот логин уже занят',
           });
         }
-        // TODO Выделить поля при ошибке
       });
   };
 

@@ -32,13 +32,11 @@ export const Profile: FC = () => {
     defaultValues,
   });
 
-  const { setValue } = methods;
+  const { reset } = methods;
 
   useEffect(() => {
     if (login && email) {
-      setValue('login', login);
-      setValue('email', email);
-      setValue('avatar', avatar ?? '');
+      reset({ login, email, avatar: avatar ?? '' });
     }
   }, [avatar, login, email]);
 

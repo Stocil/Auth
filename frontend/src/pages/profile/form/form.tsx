@@ -16,21 +16,23 @@ import { ProfileLoginField } from './login-field';
 import { ProfileFormFields } from './type';
 
 export const ProfileForm: FC = () => {
-  const { handleSubmit } = useFormContext<ProfileFormFields>();
+  const { handleSubmit, formState } = useFormContext<ProfileFormFields>();
   const { onEditUser, isLoading } = useEditUser();
+
+  const { dirtyFields, isDirty } = formState;
 
   return (
     <ProfileUserForm onSubmit={handleSubmit(onEditUser)}>
       <ProfileUserFields>
-        <ProfileUserFieldWrapper>
+        <ProfileUserFieldWrapper isDirty={dirtyFields.login}>
           <ProfileLoginField />
         </ProfileUserFieldWrapper>
 
-        <ProfileUserFieldWrapper>
+        <ProfileUserFieldWrapper isDirty={dirtyFields.email}>
           <ProfileEmailField />
         </ProfileUserFieldWrapper>
 
-        <ProfileUserFieldWrapper>
+        <ProfileUserFieldWrapper isDirty={dirtyFields.avatar}>
           <ProfileAvatarField />
         </ProfileUserFieldWrapper>
       </ProfileUserFields>
@@ -39,7 +41,7 @@ export const ProfileForm: FC = () => {
         fullWidth
         color='success'
         type='submit'
-        disabled={isLoading}
+        disabled={isLoading || !isDirty}
         isLoading={isLoading}
       >
         Сохранить
