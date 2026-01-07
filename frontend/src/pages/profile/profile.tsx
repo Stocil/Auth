@@ -7,7 +7,6 @@ import { getProfilePreviewAvatar } from 'store/profile/selectors';
 import { setProfilePreviewAvatar } from 'store/profile/slice';
 import { getUserInfo } from 'store/user/selectors';
 
-import { Avatar } from 'components/avatar';
 import { PageWrapper } from 'components/page-wrapper';
 
 import { ProfileAvatarContent } from './avatar-content';
