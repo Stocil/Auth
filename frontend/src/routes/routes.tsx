@@ -4,6 +4,7 @@ import { PrivateRoute } from 'features/private-route/private-route';
 
 import { Authorization } from 'pages/authorization';
 import { HomePage } from 'pages/homepage';
+import { NotFound } from 'pages/not-found';
 import { Profile } from 'pages/profile';
 import { User } from 'pages/user';
 
@@ -14,6 +15,7 @@ type Route = {
 
 export enum routesKeys {
   main = 'main',
+  notFound = 'notFound',
   signIn = 'signIn',
   signUp = 'signUp',
   profile = 'profile',
@@ -22,6 +24,7 @@ export enum routesKeys {
 
 export enum routesPaths {
   main = '/',
+  notFound = '*',
   signIn = '/sign-in',
   signUp = '/sign-up',
   profile = '/profile',
@@ -32,6 +35,10 @@ export const routes: Record<routesKeys, Route> = {
   main: {
     path: routesPaths.main,
     element: <HomePage />,
+  },
+  notFound: {
+    path: routesPaths.notFound,
+    element: <NotFound />,
   },
   signIn: {
     path: routesPaths.signIn,

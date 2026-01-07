@@ -1,9 +1,13 @@
 import { Stack, styled } from '@mui/material';
 
-export const VerticalStack = styled(Stack)`
+type VerticalStackProps = {
+  gap?: string;
+};
+
+export const VerticalStack = styled(Stack)<VerticalStackProps>`
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: ${({ gap }) => gap ?? '10px'};
 `;
 
 export const HorizontalStack = styled(Stack)`
