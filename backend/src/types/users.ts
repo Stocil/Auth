@@ -22,7 +22,7 @@ export namespace User {
     }
 
     export namespace EditUser {
-      export type Request = Omit<TokenData, 'gmail'>; // TODO: Присылать потом с беком
+      export type Request = Omit<TokenData, 'gmail'>;
       export type Response = TokenData;
     }
 

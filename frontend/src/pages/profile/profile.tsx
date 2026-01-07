@@ -7,9 +7,10 @@ import { getProfilePreviewAvatar } from 'store/profile/selectors';
 import { setProfilePreviewAvatar } from 'store/profile/slice';
 import { getUserInfo } from 'store/user/selectors';
 
-import { Avatar } from 'components/avatar/avatar';
+import { Avatar } from 'components/avatar';
 import { PageWrapper } from 'components/page-wrapper';
 
+import { ProfileAvatarContent } from './avatar-content';
 import { PageEmptyPage } from './empty-page';
 import { ProfileForm } from './form';
 import { ProfileFormFields } from './form/type';
@@ -20,7 +21,7 @@ export const Profile: FC = () => {
 
   const previewAvatar = useSelector(getProfilePreviewAvatar);
   const userData = useSelector(getUserInfo);
-  const { avatar, login, email, id } = userData;
+  const { avatar, login, email, id, gmail } = userData;
 
   const defaultValues: ProfileFormFields = {
     login: login,
@@ -49,17 +50,12 @@ export const Profile: FC = () => {
   );
 
   return (
-    <PageWrapper
-      isLoading={false}
-      isEmptySearch={!id}
-      noDataFallback={<PageEmptyPage />}
-    >
+    <PageWrapper isEmptySearch={!id} noDataFallback={<PageEmptyPage />}>
       <ProfileContainer>
-        <Avatar
+        <ProfileAvatarContent
           src={previewAvatar ?? avatar ?? ''}
           noUrlText={login?.[0]}
-          size={350}
-          textSize='h1'
+          gmail={gmail}
         />
 
         <FormProvider {...methods}>

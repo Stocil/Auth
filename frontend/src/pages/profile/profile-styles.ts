@@ -7,18 +7,18 @@ type ProfileUserFieldWrapperProps = {
 };
 
 export const ProfileContainer = styled(HorizontalStack)`
-  gap: 70px;
+  gap: 40px;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
 `;
 
 export const ProfileUserForm = styled('form')`
-  height: 100%;
+  height: 350px;
 
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: space-between;
+  gap: 15px;
 `;
 
 export const ProfileUserFields = styled(VerticalStack)`

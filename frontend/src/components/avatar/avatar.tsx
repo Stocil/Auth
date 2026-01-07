@@ -9,16 +9,18 @@ type Props = AvatarProps & {
   noUrlText: string | undefined;
   size: number;
   textSize?: Variant;
+  borderRadius?: string | number;
 };
 
 export const Avatar: FC<Props> = ({
   noUrlText,
   size,
   textSize = 'h6',
+  borderRadius,
   ...props
 }) => {
   return (
-    <ColoredAvatar sx={{ width: size, height: size }} {...props}>
+    <ColoredAvatar sx={{ width: size, height: size, borderRadius }} {...props}>
       <Typography variant={textSize}>{noUrlText?.toUpperCase()}</Typography>
     </ColoredAvatar>
   );

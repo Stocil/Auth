@@ -19,7 +19,6 @@ export const PageWrapper: FC<Props> = ({
   errorFallback,
 }) => {
   if (isError) {
-    //TODO Добавить дефолтную страницу ошибки
     return <Loader isLoading={isLoading}>{errorFallback}</Loader>;
   }
 
