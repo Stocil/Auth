@@ -17,10 +17,14 @@ export const Avatar: FC<Props> = ({
   size,
   textSize = 'h6',
   borderRadius,
+  sx,
   ...props
 }) => {
   return (
-    <ColoredAvatar sx={{ width: size, height: size, borderRadius }} {...props}>
+    <ColoredAvatar
+      sx={{ width: size, height: size, borderRadius, ...sx }}
+      {...props}
+    >
       <Typography variant={textSize}>{noUrlText?.toUpperCase()}</Typography>
     </ColoredAvatar>
   );

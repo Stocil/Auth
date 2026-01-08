@@ -1,12 +1,18 @@
-import { Tooltip as TooltipMui, TooltipProps } from '@mui/material';
+import { Tooltip as MuiTooltip, TooltipProps } from '@mui/material';
 
 type Props = TooltipProps & {
   margin?: number;
+  isSuccess?: boolean;
 };
 
-export const Tooltip = ({ children, margin = -15, ...props }: Props) => {
+export const Tooltip = ({
+  children,
+  margin = -15,
+  isSuccess,
+  ...props
+}: Props) => {
   return (
-    <TooltipMui
+    <MuiTooltip
       placement='top'
       slotProps={{
         popper: {
@@ -19,10 +25,15 @@ export const Tooltip = ({ children, margin = -15, ...props }: Props) => {
             },
           ],
         },
+        tooltip: isSuccess && {
+          sx: {
+            backgroundColor: ({ palette }) => palette.success.main,
+          },
+        },
       }}
       {...props}
     >
       {children}
-    </TooltipMui>
+    </MuiTooltip>
   );
 };

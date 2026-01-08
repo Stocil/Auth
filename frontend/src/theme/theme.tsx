@@ -104,6 +104,13 @@ export const ThemeModeProvider = ({ children }: ThemeProps) => {
           },
         },
       },
+      MuiTooltip: {
+        styleOverrides: {
+          tooltip: {
+            borderRadius: '5px',
+          },
+        },
+      },
     },
 
     breakpoints: {
