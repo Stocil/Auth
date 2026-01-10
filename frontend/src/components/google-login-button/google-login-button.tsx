@@ -1,13 +1,21 @@
 import { FC } from 'react';
 
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+import {
+  CredentialResponse,
+  GoogleLogin,
+  GoogleLoginProps,
+} from '@react-oauth/google';
 
-type Props = {
+type Props = GoogleLoginProps & {
   onSuccess: (props: CredentialResponse) => void;
   onError: VoidFunction;
 };
 
-export const GoogleLoginButton: FC<Props> = ({ onSuccess, onError }) => {
+export const GoogleLoginButton: FC<Props> = ({
+  onSuccess,
+  onError,
+  ...props
+}) => {
   return (
     <GoogleLogin
       onSuccess={onSuccess}
@@ -16,6 +24,7 @@ export const GoogleLoginButton: FC<Props> = ({ onSuccess, onError }) => {
       shape='pill'
       theme='filled_black'
       type='icon'
+      {...props}
     />
   );
 };

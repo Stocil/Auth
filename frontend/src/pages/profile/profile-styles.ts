@@ -13,8 +13,6 @@ export const ProfileContainer = styled(HorizontalStack)`
 `;
 
 export const ProfileUserForm = styled('form')`
-  height: 350px;
-
   display: flex;
   flex-direction: column;
   align-items: start;
