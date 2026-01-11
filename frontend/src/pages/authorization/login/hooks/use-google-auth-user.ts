@@ -1,7 +1,8 @@
 import { DefaultServerError } from 'types';
+import { GoogleTokenUserData } from 'types/google-token';
 
 import { CredentialResponse } from '@react-oauth/google';
-import { JwtPayload, jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { Location, useLocation } from 'react-router';
 
@@ -16,12 +17,6 @@ import { routesPaths } from 'routes/routes';
 import { HttpCodes } from 'utils/http-codes';
 
 import { LocationStateType } from '../../types';
-
-type UserGoogleData = JwtPayload & {
-  name: string;
-  email: string;
-  picture: string;
-};
 
 type Hook = () => {
   onSuccess: (props: CredentialResponse) => void;
@@ -50,7 +45,7 @@ export const useGoogleAuthUser: Hook = () => {
       return;
     }
 
-    const userJWTData = jwtDecode<UserGoogleData>(credential);
+    const userJWTData = jwtDecode<GoogleTokenUserData>(credential);
 
     checkUserLink({ gmail: userJWTData.email })
       .unwrap()

@@ -9,6 +9,7 @@ import { refresh } from './token/refresh';
 import { editUserData } from './user/edit';
 import { getUser } from './user/get';
 import { checkGoogleLink } from './user/google/check-link';
+import { linkGoogleAccount } from './user/google/link-account';
 import { signUpByGoogle } from './user/google/sign-up';
 import { signIn } from './user/sign-in';
 import { signUp } from './user/sign-up';
@@ -31,3 +32,6 @@ apiRouter.route('/logout').get(deleteToken);
 // Роуты для авторизации через google
 apiRouter.route('/google/check-link').post(requireBodyCheck, checkGoogleLink);
 apiRouter.route('/google/sign-up').put(requireBodyCheck, signUpByGoogle);
+apiRouter
+  .route('/google/link')
+  .post(authenticateToken, requireBodyCheck, linkGoogleAccount);

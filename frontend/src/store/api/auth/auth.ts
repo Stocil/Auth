@@ -55,6 +55,17 @@ export const authApi = baseApi.enhanceEndpoints({}).injectEndpoints({
         body,
       }),
     }),
+
+    linkGoogleAccount: builder.mutation<
+      Auth.Methods.LinkGoogleAccount.Response,
+      Auth.Methods.LinkGoogleAccount.Request
+    >({
+      query: (body) => ({
+        url: 'google/link',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -65,4 +76,5 @@ export const {
   useCheckUserAccessQuery,
   useCheckUserGoogleLinkMutation,
   useRegisterUserByGoogleMutation,
+  useLinkGoogleAccountMutation,
 } = authApi;

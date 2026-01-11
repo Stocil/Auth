@@ -4,7 +4,7 @@ import { usersBd } from 'data-base/data-base';
 
 import { prepareDataForToken } from 'utils/prepare-data-for-token';
 
-type Props = User.Methods.EditUser.Request;
+type Props = Pick<User.Entity, 'id'> & Partial<Omit<User.Entity, 'id'>>;
 
 type UpdateUser = (props: Props) => User.TokenData;
 

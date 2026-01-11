@@ -39,5 +39,10 @@ export namespace User {
     export namespace RegisterUserByGoogle {
       export type Request = Omit<Entity, 'id' | 'email'>;
     }
+
+    export namespace LinkGoogleAccount {
+      export type Request = Pick<Entity, 'gmail'>;
+      export type Response = TokenData;
+    }
   }
 }

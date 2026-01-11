@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useEditUserMutation } from 'store/api/user';
 import { getUserInfo } from 'store/user/selectors';
-import { setUserInfo, setUserToken } from 'store/user/slice';
+import { setUserInfo } from 'store/user/slice';
 
 import { useSnackbar } from 'hooks/use-snackbar';
+import { useUpdateUserData } from 'hooks/use-update-user-data';
 
 import { HttpCodes } from 'utils/http-codes';
-import { setCookieToken } from 'utils/token';
 
 import { ProfileFormFields } from '../type';
 
@@ -18,6 +18,8 @@ export const useEditUser = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const { getValues, setError } = useFormContext<ProfileFormFields>();
+
+  const { onUpdateData } = useUpdateUserData();
 
   const [editUser, { isLoading }] = useEditUserMutation();
 
@@ -36,10 +38,10 @@ export const useEditUser = () => {
     editUser(userNewDataWithId)
       .unwrap()
       .then((token) => {
+        const successMessage = 'Данные успешно обновлены';
+
         dispatch(setUserInfo(userNewDataWithId));
-        dispatch(setUserToken(token));
-        enqueueSnackbar('Данные успешно обновлены');
-        setCookieToken(token);
+        onUpdateData({ token, successMessage });
       })
       .catch((e: DefaultServerError) => {
         enqueueSnackbar(e.data?.error, { variant: 'error' });

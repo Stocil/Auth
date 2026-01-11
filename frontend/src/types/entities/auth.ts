@@ -32,5 +32,10 @@ export namespace Auth {
       export type Request = GoogleEntity;
       export type Response = string;
     }
+
+    export namespace LinkGoogleAccount {
+      export type Request = Pick<GoogleEntity, 'gmail'>;
+      export type Response = string;
+    }
   }
 }
